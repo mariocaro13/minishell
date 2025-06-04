@@ -1,0 +1,22 @@
+#include "minishell.h"
+
+t_global_shell_state	g_shell_state;
+
+int	main(int argc, char **argv, char **envp)
+{
+	t_shell_data	shell_data;
+
+	if (argc != 1 || argv[1])
+	{
+		printf(MSG_USAGE);
+		exit(0);
+	}
+	if (ft_init_shell(&shell_data, envp) != EXIT_SUCCESS)
+	{
+		ft_putstr_fd(MSG_ERR_INIT, STDERR_FILENO);
+		exit(EXIT_FAILURE);
+	}
+	printf(MSG_WELCOME);
+	ft_shell_loop(&shell_data);
+	return (EXIT_SUCCESS);
+}

@@ -1,0 +1,10 @@
+{
+	"files.associations": {
+		"minishell.h": "c",
+		"utils.h": "c",
+		"init.h": "c",
+		"random": "c",
+		"cstdlib": "c",
+		"builtins.h": "c"
+	}
+}

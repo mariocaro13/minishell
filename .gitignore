@@ -1,7 +1,7 @@
 *.txt
 *.vscode
 minishell
-
+*.o
 # Created by https://www.toptal.com/developers/gitignore/api/visualstudiocode,c,intellij
 # Edit at https://www.toptal.com/developers/gitignore?templates=visualstudiocode,c,intellij
 

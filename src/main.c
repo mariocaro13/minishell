@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-t_global_shell_state	g_shell_state;
+bool	g_is_in_heredoc;
 
 int	main(int argc, char **argv, char **envp)
 {

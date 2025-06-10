@@ -25,6 +25,7 @@ static void	ft_build_arguments_loop(t_parser_data *parser_data, char **args,
 		args[index++] = ft_extract_token_argument(parser_data);
 		num_arg--;
 	}
+	args[index] = NULL;
 }
 
 static char	**ft_build_command_arguments(t_parser_data *parser_data)
@@ -42,15 +43,15 @@ static char	**ft_build_command_arguments(t_parser_data *parser_data)
 	return (args);
 }
 
-t_commands_list	*ft_build_command(t_parser_data *parser_tools)
+t_commands_list	*ft_build_command(t_parser_data *parser_data)
 {
 	char	**args;
 
-	ft_remove_redirections(parser_tools);
-	args = ft_build_command_arguments(parser_tools);
+	ft_remove_redirections(parser_data);
+	args = ft_build_command_arguments(parser_data);
 	return (ft_command_list_create_node(args,
-			parser_tools->num_redirections,
-			parser_tools->redirections));
+			parser_data->num_redirections,
+			parser_data->redirections));
 }
 
 t_lexer_list	*ft_get_next_command(t_lexer_list *lexer_lst)

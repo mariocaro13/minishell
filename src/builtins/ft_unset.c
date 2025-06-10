@@ -9,8 +9,8 @@ char	**whileloop_del_var(char **arr, char **rtn, char *str)
 	j = 0;
 	while (arr[index] != NULL)
 	{
-		if (!(ft_strncmp(arr[index], str, ft_equal_sign(arr[index]) - 1) == 0
-				&& str[ft_equal_sign(arr[index])] == '\0'
+		if (!(ft_strncmp(arr[index], str, ft_get_equal_sign_index(arr[index]) - 1) == 0
+				&& str[ft_get_equal_sign_index(arr[index])] == '\0'
 				&& arr[index][ft_strlen(str)] == '='))
 		{
 			rtn[j] = ft_strdup(arr[index]);
@@ -61,7 +61,7 @@ int	unset_error(t_commands_list *simple_cmd)
 			return (EXIT_FAILURE);
 		}
 	}
-	if (ft_equal_sign(simple_cmd->str[1]) != 0)
+	if (ft_get_equal_sign_index(simple_cmd->str[1]) != 0)
 	{
 		ft_putendl_fd("minishell: unset: not a valid identifier",
 			STDERR_FILENO);

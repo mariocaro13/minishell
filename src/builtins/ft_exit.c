@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-void	free_tools(t_shell_data *shell_data)
+void	ft_free_shell_data(t_shell_data *shell_data)
 {
 	ft_free_array(shell_data->paths);
 	ft_free_array(shell_data->envp);
@@ -49,14 +49,14 @@ int	ft_exit(t_shell_data *shell_data, t_commands_list *simple_cmd)
 {
 	char	**str;
 
-	ft_putendl_fd("exit", STDERR_FILENO);
+	ft_putendl_fd(COLOR_YELLOW "exit" COLOR_RESET, STDERR_FILENO);
 	if (simple_cmd->str[1] && simple_cmd->str[2])
 	{
 		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET "exit: too many arguments\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	str = ft_duplicate_string_array(simple_cmd->str);
-	free_tools(shell_data);
+	ft_free_shell_data(shell_data);
 	determine_exit_code(str);
 	return (EXIT_SUCCESS);
 }

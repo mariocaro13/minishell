@@ -5,7 +5,7 @@ int	ft_reset_shell_state(t_shell_data *shell_data)
 	if (!shell_data)
 		return (EXIT_FAILURE);
 	ft_init_shell_data(shell_data);
-	ft_init_global_shell_state();
+	ft_init_global_shell_state(shell_data);
 	ft_init_env_paths(shell_data);
 	ft_init_signals();
 	return (EXIT_SUCCESS);

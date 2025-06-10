@@ -57,7 +57,8 @@ int	ft_error_print_command_not_found(char *str)
 
 int	ft_error_print_export(char *c)
 {
-	ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT "export: " COLOR_RESET, STDERR_FILENO);
+	ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT "export: " COLOR_RESET,
+		STDERR_FILENO);
 	if (c)
 	{
 		ft_putchar_fd('\'', STDERR_FILENO);

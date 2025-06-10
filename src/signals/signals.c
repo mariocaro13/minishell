@@ -8,17 +8,15 @@ int	ft_rl_event_hook(void)
 void	ft_sigint_handler(int signum)
 {
 	(void)signum;
-	if (!g_shell_state.is_in_heredoc)
-		ft_putstr_fd("\n", STDERR_FILENO);
-	if (g_shell_state.is_in_cmd)
-	{
-		g_shell_state.should_stop_heredoc = true;
-		rl_done = true;
-	}
+	if (g_is_in_heredoc)
+		rl_done = 1;
 	else
+	{
+		ft_putstr_fd("\n", STDERR_FILENO);
+		rl_replace_line("", 0);
 		rl_on_new_line();
-	rl_replace_line("", 0);
-	rl_redisplay();
+		rl_redisplay();
+	}
 }
 
 void	ft_sigquit_handler(int signum)

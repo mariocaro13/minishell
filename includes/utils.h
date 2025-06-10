@@ -14,15 +14,17 @@ bool	ft_are_quotes_closed(const char *line);
 int		ft_get_quote_len(int index, char *str, char del);
 size_t	ft_count_quotes(char *str);
 char	*ft_del_quotes(char *str, char c);
-char	*delete_quotes_value(char *str);
-//char	*delete_quotes_export(char *str, char c);
+char	*ft_del_quotes_value(char *str);
+char	*ft_apply_del_quotes(char *str, char quote_symbol);
 
 // input_utils
 char	*ft_get_trimmed_line(void);
 
 // str_utils
-char	*join_split_str(char **split_str, char *new_str);
-char	**resplit_str(char **double_arr);
+char	*ft_join_split_str(char **split_str, char *new_str);
+char	**ft_resplit_str(char **double_arr);
+char	*ft_char_to_str(char c);
+char	*ft_strjoin_free(char *s1, char *s2);
 
 // path_utils
 int		ft_append_slash_if_missing(char **path);

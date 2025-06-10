@@ -45,4 +45,35 @@
 # define EXPORT "export"
 # define EXPORT_LEN 6
 
+/**
+*  ____        _ _ _   _           
+* | __ ) _   _(_) | |_(_)_ __  ___ 
+* |  _ \| | | | | | __| | '_ \/ __|
+* | |_) | |_| | | | |_| | | | \__ \
+* |____/ \__,_|_|_|\__|_|_| |_|___/
+*/
+
+# define BUILTIN_ECHO		"echo"
+# define BUILTIN_ECHO_LEN	5
+
+# define BUILTIN_CD			"cd"
+# define BUILTIN_CD_LEN		3
+
+# define BUILTIN_PWD		"pwd"
+# define BUILTIN_PWD_LEN	4
+
+# define BUILTIN_EXPORT		"export"
+# define BUILTIN_EXPORT_LEN	7
+
+# define BUILTIN_UNSET		"unset"
+# define BUILTIN_UNSET_LEN	6
+
+# define BUILTIN_ENV		"env"
+# define BUILTIN_ENV_LEN	4
+
+# define BUILTIN_EXIT		"exit"
+# define BUILTIN_EXIT_LEN	5
+
+# define FILENAME_HEREDOC	"build/.tmp_heredoc_file_"
+
 #endif

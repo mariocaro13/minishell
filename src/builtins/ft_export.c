@@ -5,14 +5,14 @@ int	variable_exist(t_shell_data *shell_data, char *str)
 	int	index;
 
 	index = 0;
-	if (str[ft_equal_sign(str)] == '\"')
+	if (str[ft_get_equal_sign_index(str)] == '\"')
 		ft_del_quotes(str, '\"');
-	if (str[ft_equal_sign(str)] == '\'')
+	if (str[ft_get_equal_sign_index(str)] == '\'')
 		ft_del_quotes(str, '\'');
 	while (shell_data->envp[index])
 	{
 		if (ft_strncmp(shell_data->envp[index],
-				str, ft_equal_sign(shell_data->envp[index])) == 0)
+				str, ft_get_equal_sign_index(shell_data->envp[index])) == 0)
 		{
 			free(shell_data->envp[index]);
 			shell_data->envp[index] = ft_strdup(str);
@@ -30,13 +30,13 @@ int	check_parameter(char *str)
 	index = 0;
 	if (ft_isdigit(str[0]))
 		return (ft_error_print_export(str));
-	if (ft_equal_sign(str) == 0)
+	if (ft_get_equal_sign_index(str) == 0)
 		return (EXIT_FAILURE);
 	if (str[0] == '=')
 		return (ft_error_print_export(str));
 	while (str[index] != '=')
 	{
-		if (check_valid_identifier(str[index]))
+		if (ft_check_valid_identifier(str[index]))
 			return (ft_error_print_export(str));
 		index++;
 	}
@@ -73,9 +73,9 @@ char	**add_var(char **arr, char *str)
 	size_t	index;
 
 	index = 0;
-	if (str[ft_equal_sign(str)] == '\"')
+	if (str[ft_get_equal_sign_index(str)] == '\"')
 		ft_del_quotes(str, '\"');
-	if (str[ft_equal_sign(str)] == '\'')
+	if (str[ft_get_equal_sign_index(str)] == '\'')
 		ft_del_quotes(str, '\'');
 	while (arr[index] != NULL)
 		index++;
@@ -94,7 +94,7 @@ int	ft_export(t_shell_data *shell_data, t_commands_list *simple_cmd)
 
 	index = 1;
 	if (!simple_cmd->str[1] || simple_cmd->str[1][0] == '\0')
-		mini_env(shell_data, simple_cmd);
+		ft_env(shell_data, simple_cmd);
 	else
 	{
 		while (simple_cmd->str[index])

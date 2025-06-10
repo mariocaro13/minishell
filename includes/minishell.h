@@ -31,14 +31,4 @@
 // Loop
 int		ft_shell_loop(t_shell_data *shell_data);
 
-void	init_stri(int index, int j, t_shell_data *shell_data);
-char	*char_to_str(char c);
-int		after_dol_lenght(char *str, int j);
-void	free_things(char *tmp2, t_shell_data *shell_data, int index);
-void	print_parser(t_commands_list commands_list);
-
-int		question_mark(char **tmp);
-int		(*ft_get_builtin_function(char *str))
-(t_shell_data *shell_data, t_commands_list *simple_cmd);
-
 #endif

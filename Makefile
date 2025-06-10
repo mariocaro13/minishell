@@ -1,3 +1,15 @@
+# **************************************************************************** #
+#                                                                              #
+#                                                         :::      ::::::::    #
+#    Makefile                                           :+:      :+:    :+:    #
+#                                                     +:+ +:+         +:+      #
+#    By: mcaro-ro <mcaro-ro@student.42madrid.com    +#+  +:+       +#+         #
+#                                                 +#+#+#+#+#+   +#+            #
+#    Created: 2025/06/10 20:22:12 by mcaro-ro          #+#    #+#              #
+#    Updated: 2025/06/10 22:37:37 by mcaro-ro         ###   ########.fr        #
+#                                                                              #
+# **************************************************************************** #
+
 NAME = minishell
 MKDIR = mkdir
 
@@ -69,7 +81,6 @@ src	=	$(PATH_SOURCE)/main.c					\
 		$(PATH_BUILTINS)/ft_export.c			\
 		$(PATH_BUILTINS)/ft_pwd.c 				\
 		$(PATH_BUILTINS)/ft_unset.c				\
-		$(PATH_BUILTINS)/utils_builtins.c		\
 		$(PATH_UTILS)/utils.c					\
 		$(PATH_UTILS)/clean_utils.c				\
 		$(PATH_UTILS)/path_utils.c				\
@@ -78,13 +89,16 @@ src	=	$(PATH_SOURCE)/main.c					\
 		$(PATH_UTILS)/str_utils.c				\
 		$(PATH_UTILS)/input_utils.c				\
 		$(PATH_UTILS)/pipes_utils.c				\
+		$(PATH_UTILS)/expander_utils.c			\
+		$(PATH_UTILS)/heredoc_utils.c			\
 		$(PATH_EXECUTOR)/executor.c				\
 		$(PATH_EXECUTOR)/check_redirections.c	\
 		$(PATH_EXECUTOR)/handle_cmd.c			\
 		$(PATH_EXECUTOR)/heredoc.c				\
 		$(PATH_EXPANDER)/expander.c				\
-		$(PATH_EXPANDER)/expanders_utils.c		\
+		$(PATH_EXPANDER)/expander_str.c			\
 		$(PATH_EXPANDER)/dollar_sign.c			\
+		$(PATH_EXPANDER)/question_mark.c		\
 
 OBJS	=	$(addprefix $(PATH_OBJECTS), $(notdir $(patsubst %.c, %.o, $(src))))
 

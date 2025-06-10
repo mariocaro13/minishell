@@ -1,7 +1,7 @@
 #include "minishell.h"
 
-char	*join_split_str(char **split_str, char *new_str);
-char	**resplit_str(char **double_arr);
+char	*ft_join_split_str(char **split_str, char *new_str);
+char	**ft_resplit_str(char **double_arr);
 
 int	find_cmd(t_commands_list *cmd, t_shell_data *shell_data)
 {
@@ -9,7 +9,7 @@ int	find_cmd(t_commands_list *cmd, t_shell_data *shell_data)
 	char	*mycmd;
 
 	index = 0;
-	cmd->str = resplit_str(cmd->str);
+	cmd->str = ft_resplit_str(cmd->str);
 	if (!access(cmd->str[0], F_OK))
 		execve(cmd->str[0], cmd->str, shell_data->envp);
 	while (shell_data->paths[index])

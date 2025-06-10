@@ -10,7 +10,7 @@ static int	ft_get_word_len(int start, char *str)
 	advance = 0;
 	while (str[start + index]
 		&& !ft_is_whitespace(str[start + index])
-		&& !ft_is_operator_char(str[start + 1]))
+		&& !ft_is_operator_char(str[start + index]))
 	{
 		c = str[start + index];
 		if (c == SYMBOL_QUOTE || c == SYMBOL_QUOTE_DOUBLE)

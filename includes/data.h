@@ -1,20 +1,14 @@
-/**
- * @file data.h
- * @brief Contains data structures and global variables for the minishell
- *  project.
- *
- * This header defines the core data structures used throughout the minishell,
- * including the global shell state and the main shell context.
- */
 #ifndef DATA_H
 # define DATA_H
+
+extern bool						g_is_in_heredoc;
 
 // Forwards declarations
 typedef struct s_lexer_list		t_lexer_list;
 typedef struct s_commands_list	t_commands_list;
 
 /**
- * @struct s_global_shell_state
+ * @struct s_shell_state
  * @brief Represents the global state of the shell.
  *
  * @var error_num      The last error number encountered by the shell.
@@ -25,15 +19,12 @@ typedef struct s_commands_list	t_commands_list;
  * @var is_in_heredoc	Flag indicating if the shell is currently processing a
  *  heredoc.
  */
-typedef struct s_global_shell_state
+typedef struct s_shell_state
 {
-	int		error_num;
 	bool	should_stop_heredoc;
 	bool	is_in_cmd;
-	bool	is_in_heredoc;
-}	t_global_shell_state;
-
-extern t_global_shell_state		g_shell_state;
+	int		error_num;
+}	t_shell_state;
 
 /**
  * @struct s_shell_data
@@ -64,6 +55,7 @@ typedef struct s_shell_data
 	int				*pid;
 	bool			heredoc;
 	bool			reset;
+	t_shell_state	state;
 }	t_shell_data;
 
 typedef struct s_commands_list

@@ -33,16 +33,17 @@ void	ft_init_shell_data(t_shell_data *shell_data)
 {
 	shell_data->commands_list = NULL;
 	shell_data->lexer_list = NULL;
+	shell_data->pipes = 0;
 	shell_data->pid = NULL;
 	shell_data->heredoc = false;
 	shell_data->reset = false;
 }
 
-void	ft_init_global_shell_state(void)
+void	ft_init_global_shell_state(t_shell_data *shell_data)
 {
-	g_shell_state.should_stop_heredoc = false;
-	g_shell_state.is_in_cmd = false;
-	g_shell_state.is_in_heredoc = false;
+	shell_data->state.should_stop_heredoc = false;
+	shell_data->state.is_in_cmd = false;
+	g_is_in_heredoc = false;
 }
 
 void	ft_init_signals(void)
@@ -64,7 +65,8 @@ int	ft_init_shell(t_shell_data *shell_data, char **envp)
 		return (EXIT_FAILURE);
 	}
 	ft_init_shell_data(shell_data);
-	ft_init_global_shell_state();
+	shell_data->state.error_num = 0;
+	ft_init_global_shell_state(shell_data);
 	if (ft_init_env_paths(shell_data) != EXIT_SUCCESS)
 	{
 		ft_clean_shell_resources(shell_data);

@@ -7,7 +7,7 @@
 
 # define MSG_EXIT "exit"
 
-# define MSG_HEREDOC	"\033[1;34m> \033[0m"
+# define MSG_HEREDOC	"> "
 
 // WELCOME
 # define MSG_WELCOME "\033[91m\n\

@@ -25,9 +25,15 @@ void	ft_command_list_clear(t_commands_list **command_list)
 		redirections_tmp = (*command_list)->redirections;
 		ft_lexer_clear(&redirections_tmp);
 		if ((*command_list)->str)
+		{
 			ft_free_array((*command_list)->str);
+			(*command_list)->str = NULL;
+		}
 		if ((*command_list)->hd_file_name)
+		{
 			free((*command_list)->hd_file_name);
+			(*command_list)->hd_file_name = NULL;
+		}
 		free(*command_list);
 		*command_list = next_node;
 	}

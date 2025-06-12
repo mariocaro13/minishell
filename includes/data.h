@@ -33,7 +33,7 @@ typedef struct s_shell_state
  * @var args           Command-line arguments as a single string.
  * @var paths          Array of paths for command lookup.
  * @var envp           Array of environment variables.
- * @var commands_list    Pointer to the list of simple commands_list to execute.
+ * @var command_list    Pointer to the list of simple command_list to execute.
  * @var lexer_list     Pointer to the list of lexer tokens.
  * @var pwd            Current working directory.
  * @var old_pwd        Previous working directory.
@@ -47,7 +47,7 @@ typedef struct s_shell_data
 	char			*args;
 	char			**paths;
 	char			**envp;
-	t_commands_list	*commands_list;
+	t_commands_list	*command_list;
 	t_lexer_list	*lexer_list;
 	char			*pwd;
 	char			*old_pwd;

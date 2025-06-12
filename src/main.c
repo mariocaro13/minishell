@@ -16,6 +16,7 @@ int	main(int argc, char **argv, char **envp)
 		ft_putstr_fd(MSG_ERR_INIT, STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
+	ft_load_history_from_file(HISTORY_FILE);
 	printf(MSG_WELCOME);
 	ft_shell_loop(&shell_data);
 	return (EXIT_SUCCESS);

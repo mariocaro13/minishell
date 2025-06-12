@@ -25,7 +25,7 @@ static int	ft_validate_input(t_shell_data *t_shell_data)
 int	ft_shell_loop(t_shell_data *shell_data)
 {
 	ft_handle_input_line(shell_data);
-	add_history(shell_data->args);
+	ft_add_to_history(shell_data->args);
 	ft_validate_input(shell_data);
 	ft_parse_lexer_list(shell_data);
 	ft_execute_commands(shell_data);

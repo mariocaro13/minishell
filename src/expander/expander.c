@@ -46,7 +46,8 @@ char	**ft_expand_command_args(t_shell_data *shell_data, char **str)
 	return (str);
 }
 
-static void	ft_expand_command_redirections(t_shell_data *shell_data, t_commands_list *command_list)
+static void	ft_expand_command_redirections(t_shell_data *shell_data,
+	t_commands_list *command_list)
 {
 	t_lexer_list	*current;
 
@@ -61,11 +62,13 @@ static void	ft_expand_command_redirections(t_shell_data *shell_data, t_commands_
 	}
 }
 
-void	ft_expander_caller(t_shell_data *shell_data, t_commands_list **command_list)
+void	ft_expander_caller(t_shell_data *shell_data,
+	t_commands_list **command_list)
 {
 	if (!command_list || !(*command_list))
 		return ;
 	if ((*command_list)->str)
-		(*command_list)->str = ft_expand_command_args(shell_data, (*command_list)->str);
+		(*command_list)->str = ft_expand_command_args(shell_data,
+				(*command_list)->str);
 	ft_expand_command_redirections(shell_data, *command_list);
 }

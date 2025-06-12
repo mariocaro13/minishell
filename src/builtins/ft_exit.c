@@ -5,7 +5,7 @@ void	ft_free_shell_data(t_shell_data *shell_data)
 	ft_free_array(shell_data->paths);
 	ft_free_array(shell_data->envp);
 	free(shell_data->args);
-	ft_command_list_clear(&shell_data->commands_list);
+	ft_command_list_clear(&shell_data->command_list);
 	free(shell_data->pwd);
 	free(shell_data->old_pwd);
 	if (shell_data->pipes)

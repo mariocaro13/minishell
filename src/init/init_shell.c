@@ -31,7 +31,7 @@ int	ft_init_shell_dirs(t_shell_data *shell_state)
 
 void	ft_init_shell_data(t_shell_data *shell_data)
 {
-	shell_data->commands_list = NULL;
+	shell_data->command_list = NULL;
 	shell_data->lexer_list = NULL;
 	shell_data->pipes = 0;
 	shell_data->pid = NULL;

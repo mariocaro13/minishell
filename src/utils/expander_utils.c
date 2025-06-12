@@ -6,7 +6,6 @@ void	ft_append_regular_char(const char *str, int *index, char **result)
 	char	*tmp_result;
 
 	char_str = ft_char_to_str(str[*index]);
-	(*index)++;
 	tmp_result = ft_strjoin(*result, char_str);
 	free(*result);
 	*result = tmp_result;

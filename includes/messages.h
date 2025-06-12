@@ -30,18 +30,18 @@
 # define HISTORY_FD "minishell_history.txt"
 
 // ERROR MSG
-# define MSG_ERR_INIT "Error initializing shell\n"
-# define MSG_ERR_OPEN_FD "Error: error opening file\n"
-# define MSG_ERR_SYNTAX "Syntax error: unexpected token\n"
+# define MSG_ERR_INIT "Error initializing shell.\n"
+# define MSG_ERR_OPEN_FD "Error: error opening file.\n"
+# define MSG_ERR_SYNTAX "Syntax error: unexpected token.\n"
 # define MSG_ERR_SYNTAX_TOKEN "Syntax error: unexpected token: "
-# define MSG_ERR_MEMORY "Memory error: unable to assign memory\n"
-# define MSG_ERR_QUOTE "Quote error: unable to locate closing quote\n"
-# define MSG_ERR_PARSER "Parser error\n"
-# define MSG_ERR_PIPE "Pipe error: unable to create pipe\n"
-# define MSG_ERR_FORK "Fork error\n"
-# define MSG_ERR_REDIRECT_OUT "Outfile error\n"
-# define MSG_ERR_REDIRECT_IN "Infile error: no such file or directory\n"
-# define MSG_ERR_PATH "Path error: path does not exist\n"
-# define MSG_ERR_CMD_NOT_FOUND ": command not found\n"\
+# define MSG_ERR_MEMORY "Memory error: unable to assign memory.\n"
+# define MSG_ERR_QUOTE "Quote error: unable to locate closing quote.\n"
+# define MSG_ERR_PARSER "Parser error.\n"
+# define MSG_ERR_PIPE "Pipe error: unable to create pipe.\n"
+# define MSG_ERR_FORK "Fork error.\n"
+# define MSG_ERR_REDIRECT_OUT "Outfile: error.\n"
+# define MSG_ERR_REDIRECT_IN "Infile: no such file or directory: "
+# define MSG_ERR_PATH "Path error: path does not exist.\n"
+# define MSG_ERR_CMD_NOT_FOUND ": command not found.\n"
 
 #endif

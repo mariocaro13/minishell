@@ -41,7 +41,7 @@ static int	ft_process_current_lexer(t_shell_data	*shell_data)
 
 int	ft_parse_lexer_list(t_shell_data *shell_data)
 {
-	shell_data->commands_list = NULL;
+	shell_data->command_list = NULL;
 	shell_data->pipes = ft_count_pipes_in_lexer(shell_data->lexer_list);
 	if (shell_data->lexer_list && shell_data->lexer_list->token == PIPE)
 		return (ft_error_parser_token(shell_data, shell_data->lexer_list,

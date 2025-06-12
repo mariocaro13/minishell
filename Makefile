@@ -6,7 +6,7 @@
 #    By: mcaro-ro <mcaro-ro@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/10 20:22:12 by mcaro-ro          #+#    #+#              #
-#    Updated: 2025/06/10 22:37:37 by mcaro-ro         ###   ########.fr        #
+#    Updated: 2025/06/12 02:06:22 by mcaro-ro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,6 +28,7 @@ PATH_SOURCE		= src/
 PATH_INIT		= src/init/
 PATH_RESET		= src/reset/
 PATH_LOOP		= src/shell_loop/
+PATH_HISTORY	= src/history/
 PATH_SIGNALS	= src/signals/
 PATH_LEXER		= src/lexer/
 PATH_PARSER		= src/parser/
@@ -54,51 +55,54 @@ READLINE_LIB = -lreadline -lhistory -L$(READLINE_DIR)/lib
 
 READLINE_LIB = -lreadline -lhistory -L $(READLINE_DIR)/lib
 
-src	=	$(PATH_SOURCE)/main.c					\
-		$(PATH_INIT)/init_shell.c				\
-		$(PATH_INIT)/init_env.c					\
-		$(PATH_RESET)/reset_shell.c				\
-		$(PATH_LOOP)/shell_loop.c				\
-		$(PATH_ERROR)/error_msg.c				\
-		$(PATH_ERROR)/error_handling.c			\
-		$(PATH_SIGNALS)/signals.c				\
-		$(PATH_LEXER)/lexer.c					\
-		$(PATH_LEXER)/add_lexer.c				\
-		$(PATH_LEXER)/del_lexer.c				\
-		$(PATH_LEXER)/token.c					\
-		$(PATH_LEXER)/handle_token.c			\
-		$(PATH_LEXER)/word.c					\
-		$(PATH_PARSER)/parser.c					\
-		$(PATH_PARSER)/commands.c				\
-		$(PATH_PARSER)/add_commands.c			\
-		$(PATH_PARSER)/del_commands.c			\
-		$(PATH_PARSER)/redirections.c			\
-		$(PATH_BUILTINS)/builtins.c				\
-		$(PATH_BUILTINS)/ft_cd.c 				\
-		$(PATH_BUILTINS)/ft_echo.c				\
-		$(PATH_BUILTINS)/ft_env.c				\
-		$(PATH_BUILTINS)/ft_exit.c				\
-		$(PATH_BUILTINS)/ft_export.c			\
-		$(PATH_BUILTINS)/ft_pwd.c 				\
-		$(PATH_BUILTINS)/ft_unset.c				\
-		$(PATH_UTILS)/utils.c					\
-		$(PATH_UTILS)/clean_utils.c				\
-		$(PATH_UTILS)/path_utils.c				\
-		$(PATH_UTILS)/env_utils.c				\
-		$(PATH_UTILS)/quote_utils.c				\
-		$(PATH_UTILS)/str_utils.c				\
-		$(PATH_UTILS)/input_utils.c				\
-		$(PATH_UTILS)/pipes_utils.c				\
-		$(PATH_UTILS)/expander_utils.c			\
-		$(PATH_UTILS)/heredoc_utils.c			\
-		$(PATH_EXECUTOR)/executor.c				\
-		$(PATH_EXECUTOR)/check_redirections.c	\
-		$(PATH_EXECUTOR)/handle_cmd.c			\
-		$(PATH_EXECUTOR)/heredoc.c				\
-		$(PATH_EXPANDER)/expander.c				\
-		$(PATH_EXPANDER)/expander_str.c			\
-		$(PATH_EXPANDER)/dollar_sign.c			\
-		$(PATH_EXPANDER)/question_mark.c		\
+src	=	$(PATH_SOURCE)/main.c						\
+		$(PATH_INIT)/init_shell.c					\
+		$(PATH_INIT)/init_env.c						\
+		$(PATH_RESET)/reset_shell.c					\
+		$(PATH_LOOP)/shell_loop.c					\
+		$(PATH_HISTORY)/history.c					\
+		$(PATH_ERROR)/error_msg.c					\
+		$(PATH_ERROR)/error_handling.c				\
+		$(PATH_SIGNALS)/signals.c					\
+		$(PATH_LEXER)/lexer.c						\
+		$(PATH_LEXER)/add_lexer.c					\
+		$(PATH_LEXER)/del_lexer.c					\
+		$(PATH_LEXER)/token.c						\
+		$(PATH_LEXER)/handle_token.c				\
+		$(PATH_LEXER)/word.c						\
+		$(PATH_PARSER)/parser.c						\
+		$(PATH_PARSER)/commands.c					\
+		$(PATH_PARSER)/add_commands.c				\
+		$(PATH_PARSER)/del_commands.c				\
+		$(PATH_PARSER)/redirections.c				\
+		$(PATH_BUILTINS)/builtins.c					\
+		$(PATH_BUILTINS)/ft_cd.c 					\
+		$(PATH_BUILTINS)/ft_echo.c					\
+		$(PATH_BUILTINS)/ft_env.c					\
+		$(PATH_BUILTINS)/ft_exit.c					\
+		$(PATH_BUILTINS)/ft_export.c				\
+		$(PATH_BUILTINS)/ft_pwd.c 					\
+		$(PATH_BUILTINS)/ft_unset.c					\
+		$(PATH_UTILS)/utils.c						\
+		$(PATH_UTILS)/clean_utils.c					\
+		$(PATH_UTILS)/path_utils.c					\
+		$(PATH_UTILS)/env_utils.c					\
+		$(PATH_UTILS)/quote_utils.c					\
+		$(PATH_UTILS)/str_utils.c					\
+		$(PATH_UTILS)/input_utils.c					\
+		$(PATH_UTILS)/pipes_utils.c					\
+		$(PATH_UTILS)/expander_utils.c				\
+		$(PATH_UTILS)/heredoc_utils.c				\
+		$(PATH_EXECUTOR)/executor.c					\
+		$(PATH_EXECUTOR)/check_redirections.c		\
+		$(PATH_EXECUTOR)/handle_commands.c			\
+		$(PATH_EXECUTOR)/execute_command.c			\
+		$(PATH_EXECUTOR)/execute_pipeline_command.c	\
+		$(PATH_EXECUTOR)/heredoc.c					\
+		$(PATH_EXPANDER)/expander.c					\
+		$(PATH_EXPANDER)/expander_str.c				\
+		$(PATH_EXPANDER)/dollar_sign.c				\
+		$(PATH_EXPANDER)/question_mark.c			\
 
 OBJS	=	$(addprefix $(PATH_OBJECTS), $(notdir $(patsubst %.c, %.o, $(src))))
 
@@ -132,6 +136,9 @@ $(PATH_OBJECTS)%.o:: $(PATH_RESET)%.c
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATH_OBJECTS)%.o:: $(PATH_LOOP)%.c
+	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
+
+$(PATH_OBJECTS)%.o:: $(PATH_HISTORY)%.c
 	@$(CC) -c $(FLAGS) $(INCLUDES) $< -o $@
 
 $(PATH_OBJECTS)%.o:: $(PATH_SIGNALS)%.c $(HEADERS)

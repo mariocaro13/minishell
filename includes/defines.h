@@ -74,6 +74,15 @@
 # define BUILTIN_EXIT		"exit"
 # define BUILTIN_EXIT_LEN	5
 
+/**
+*  _____ ___ _     _____ ____  
+* |  ___|_ _| |   | ____/ ___| 
+* | |_   | || |   |  _| \___ \ 
+* |  _|  | || |___| |___ ___) |
+* |_|   |___|_____|_____|____/ 
+*/
+
+# define HISTORY_FILE		".minishell_history"
 # define FILENAME_HEREDOC	"build/.tmp_heredoc_file_"
 
 #endif

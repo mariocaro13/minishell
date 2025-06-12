@@ -23,19 +23,21 @@ static t_lexer_list	*ft_skip_empty_tokens(t_lexer_list *lexer_list)
 	while (lexer_list && lexer_list->token == WORD)
 		lexer_list = lexer_list->next;
 	return (lexer_list);
-
 }
 
-static void	ft_error_check_redirections(t_parser_data *parser_data, t_lexer_list *node)
+static void	ft_error_check_redirections(t_parser_data *parser_data,
+	t_lexer_list *node)
 {
 	if (!node->next)
-		ft_error_parser(ERR_SYNTAX, parser_data->shell_data, parser_data->lexer_list);
+		ft_error_parser(ERR_SYNTAX, parser_data->shell_data,
+			parser_data->lexer_list);
 	if (node->next->token)
 		ft_error_parser_token(parser_data->shell_data,
 			parser_data->lexer_list, node->next->token);
 }
 
-static void	ft_process_redirection(t_lexer_list *node, t_parser_data *parser_data)
+static void	ft_process_redirection(t_lexer_list *node,
+	t_parser_data *parser_data)
 {
 	if (node->token >= REDIRECT_OUT && node->token <= REDIRECT_HEREDOC)
 	{

@@ -17,7 +17,6 @@ t_parser_data	ft_init_parser_data(t_lexer_list *lexer_list,
 //handle_redirections
 int				ft_add_redirection(t_lexer_list *tmp,
 					t_parser_data *parser_tools);
-int				handle_heredoc(t_parser_data *parser_tools, t_lexer_list *tmp);
 void			ft_remove_redirections(t_parser_data *parser_tools);
 
 // Commands

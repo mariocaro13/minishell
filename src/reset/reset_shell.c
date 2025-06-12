@@ -13,11 +13,22 @@ int	ft_reset_shell_state(t_shell_data *shell_data)
 
 int	ft_reset_shell_loop(t_shell_data *shell_data)
 {
-	ft_command_list_clear(&shell_data->commands_list);
-	free(shell_data->args);
+	ft_command_list_clear(&shell_data->command_list);
+	if (shell_data->args)
+	{
+		free(shell_data->args);
+		shell_data->args = NULL;
+	}
 	if (shell_data->pid)
+	{
 		free(shell_data->pid);
-	ft_free_array(shell_data->paths);
+		shell_data->pid = NULL;
+	}
+	if (shell_data->paths)
+	{
+		ft_free_array(shell_data->paths);
+		shell_data->paths = NULL;
+	}
 	ft_reset_shell_state(shell_data);
 	shell_data->reset = true;
 	ft_shell_loop(shell_data);

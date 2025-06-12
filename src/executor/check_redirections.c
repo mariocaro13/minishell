@@ -1,84 +1,96 @@
 #include "minishell.h"
 
-int	check_append_outfile(t_lexer_list *redirections)
+int	ft_check_append_outfile(t_lexer_list *redirections)
 {
-	int	fd;
+	int	flags;
 
+	if (!redirections || !redirections->str)
+		return (-1);
+	flags = O_CREAT | O_WRONLY;
 	if (redirections->token == REDIRECT_OUT_APPEND)
-		fd = open(redirections->str,
-				O_CREAT | O_RDWR | O_APPEND, 0644);
+		flags |= O_APPEND;
 	else
-		fd = open(redirections->str,
-				O_CREAT | O_RDWR | O_TRUNC, 0644);
-	return (fd);
+		flags |= O_TRUNC;
+	return (open(redirections->str, flags, 0644));
 }
 
-int	handle_infile(char *file)
+int	ft_handle_infile(char *file_name)
 {
 	int	fd;
 
-	fd = open(file, O_RDONLY);
+	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET "infile: No such file or directory\n",
+		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET MSG_ERR_REDIRECT_IN,
+			STDERR_FILENO);
+		ft_putstr_fd(file_name, STDERR_FILENO);
+		ft_putstr_fd("\n", STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
+	if (fd != STDIN_FILENO)
+	{
+		if (dup2(fd, STDIN_FILENO) < 0)
+		{
+			ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET MSG_ERR_PIPE,
+				STDERR_FILENO);
+			close(fd);
+			return (EXIT_FAILURE);
+		}
+		close(fd);
+	}
+	return (EXIT_SUCCESS);
+}
+
+int	ft_handle_outfile(t_lexer_list *redirection)
+{
+	int	fd;
+
+	fd = ft_check_append_outfile(redirection);
+	if (fd < 0)
+	{
+		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET MSG_ERR_REDIRECT_OUT,
 			STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	if (fd > 0 && dup2(fd, STDIN_FILENO) < 0)
+	if (fd != STDOUT_FILENO)
 	{
-		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET "pipe error\n", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
-	if (fd > 0)
+		if (dup2(fd, STDOUT_FILENO) < 0)
+		{
+			ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET MSG_ERR_PIPE,
+				STDERR_FILENO);
+			close(fd);
+			return (EXIT_FAILURE);
+		}
 		close(fd);
+	}
 	return (EXIT_SUCCESS);
 }
 
-int	handle_outfile(t_lexer_list *redirection)
+int	ft_handle_redirections(t_commands_list *cmd)
 {
-	int	fd;
+	t_lexer_list	*current;
 
-	fd = check_append_outfile(redirection);
-	if (fd < 0)
+	current = cmd->redirections;
+	while (current)
 	{
-		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET "outfile: Error\n", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
-	if (fd > 0 && dup2(fd, STDOUT_FILENO) < 0)
-	{
-		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET "pipe error\n", STDERR_FILENO);
-		return (EXIT_FAILURE);
-	}
-	if (fd > 0)
-		close(fd);
-	return (EXIT_SUCCESS);
-}
-
-int	check_redirections(t_commands_list *cmd)
-{
-	t_lexer_list	*start;
-
-	start = cmd->redirections;
-	while (cmd->redirections)
-	{
-		if (cmd->redirections->token == REDIRECT_IN)
+		if (current->token == REDIRECT_IN)
 		{
-			if (handle_infile(cmd->redirections->str))
+			if (ft_handle_infile(current->str))
 				return (EXIT_FAILURE);
 		}
-		else if (cmd->redirections->token == REDIRECT_OUT
-			|| cmd->redirections->token == REDIRECT_OUT_APPEND)
+		else if (current->token == REDIRECT_OUT
+			|| current->token == REDIRECT_OUT_APPEND)
 		{
-			if (handle_outfile(cmd->redirections))
+			if (ft_handle_outfile(current))
 				return (EXIT_FAILURE);
 		}
-		else if (cmd->redirections->token == REDIRECT_HEREDOC)
+		else if (current->token == REDIRECT_HEREDOC)
 		{
-			if (handle_infile(cmd->hd_file_name))
+			if (ft_handle_infile(cmd->hd_file_name))
 				return (EXIT_FAILURE);
+			unlink(cmd->hd_file_name);
 		}
-		cmd->redirections = cmd->redirections->next;
+		current = current->next;
 	}
-	cmd->redirections = start;
 	return (EXIT_SUCCESS);
 }

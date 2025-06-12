@@ -13,10 +13,10 @@ t_commands_list	*ft_build_command_node(t_shell_data *shell_data,
 void	ft_command_list_append_node(t_shell_data *shell_data,
 	t_commands_list *cmd_node)
 {
-	if (!shell_data->commands_list)
-		shell_data->commands_list = cmd_node;
+	if (!shell_data->command_list)
+		shell_data->command_list = cmd_node;
 	else
-		ft_command_list_add_node_back(&shell_data->commands_list, cmd_node);
+		ft_command_list_add_node_back(&shell_data->command_list, cmd_node);
 }
 
 t_commands_list	*ft_command_list_create_node(char **str,

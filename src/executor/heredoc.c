@@ -50,7 +50,8 @@ static bool	ft_is_quoted(const char *str)
 	return (false);
 }
 
-int	ft_process_heredoc(t_shell_data *shell_data, t_lexer_list *heredoc, char *file_name)
+int	ft_process_heredoc(t_shell_data *shell_data, t_lexer_list *heredoc,
+	char *file_name)
 {
 	bool	is_quoted;
 	int		result;
@@ -67,7 +68,7 @@ int	ft_process_heredoc(t_shell_data *shell_data, t_lexer_list *heredoc, char *fi
 	return (result);
 }
 
-int	ft_send_heredoc(t_shell_data *shell_data, t_commands_list *cmd)
+int	ft_handle_heredoc(t_shell_data *shell_data, t_commands_list *cmd)
 {
 	t_lexer_list	*redir;
 	int				result;

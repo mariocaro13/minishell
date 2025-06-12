@@ -51,7 +51,9 @@ char	*ft_detect_dollar_sign(t_shell_data *shell_data, char *str)
 	char	*result;
 
 	index = 0;
-	result = ft_calloc(1, sizeof(char));
+	result = ft_strdup("\0");
+	if (!result)
+		return (NULL);
 	while (str[index])
 	{
 		advance = ft_handle_digit_after_dollar(index, str);
@@ -62,7 +64,10 @@ char	*ft_detect_dollar_sign(t_shell_data *shell_data, char *str)
 			index += advance;
 		}
 		else
+		{
 			ft_append_regular_char(str, &index, &result);
+			index++;
+		}
 	}
 	return (result);
 }

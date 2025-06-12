@@ -192,3 +192,4 @@ fabric.properties
 # End of https://www.toptal.com/developers/gitignore/api/visualstudiocode,c,intellij
 Doxyfile
 minishell
+.minishell_history

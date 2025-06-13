@@ -31,6 +31,11 @@
 > cat | exit -> leak
 
 > [!WARNING]
+> echo 
+>   - [ ] no imprime el $ (posiblemente culpa del parser)
+>   - [ ] no imprime las comillas dentro de comillas (posiblemente culpa del parser). 
+
+> [!WARNING]
 > echo "'" o echo '"' no imprime las comillas, las comillas dentro de comillas se ignoran, esto creo que es bonus
 > Echarle un ojo
 

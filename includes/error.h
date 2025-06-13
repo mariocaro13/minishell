@@ -13,5 +13,6 @@ void	ft_error_print_msg_token(t_token token);
 int		ft_error_handle_msg(int error, t_shell_data *shell_data);
 int		ft_error_print_command_not_found(char *str);
 int		ft_error_print_export(char *c);
+void	ft_error_print_unset_slash_error(t_command_list *command_list);
 
 #endif

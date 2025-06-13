@@ -86,9 +86,9 @@ int	ft_handle_redirections(t_command_list *cmd)
 		}
 		else if (current->token == REDIRECT_HEREDOC)
 		{
-			if (ft_handle_infile(cmd->hd_file_name))
+			if (ft_handle_infile(cmd->heredoc_file_name))
 				return (EXIT_FAILURE);
-			unlink(cmd->hd_file_name);
+			unlink(cmd->heredoc_file_name);
 		}
 		current = current->next;
 	}

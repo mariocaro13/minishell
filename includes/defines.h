@@ -43,7 +43,8 @@
 # define PATH_PREFIX "PATH="
 # define PATH_PREFIX_LEN 5
 
-# define HOME_PREFIX "HOME="
+# define HOME		"/home/"
+# define HOME_LEN	6
 
 # define EXPORT "export"
 # define EXPORT_LEN 6
@@ -85,7 +86,7 @@
 * |_|   |___|_____|_____|____/ 
 */
 
-# define HISTORY_FILE		".minishell_history"
+# define HISTORY_FILE		".m&mshell_history"
 # define FILENAME_HEREDOC	"build/.tmp_heredoc_file_"
 
 #endif

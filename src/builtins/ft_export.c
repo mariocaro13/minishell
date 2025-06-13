@@ -1,14 +1,16 @@
 #include "minishell.h"
 
-int	variable_exist(t_shell_data *shell_data, char *str)
+int	ft_update_env_var(t_shell_data *shell_data, char *str)
 {
 	int	index;
+	int	equal_index;
 
 	index = 0;
-	if (str[ft_get_equal_sign_index(str)] == '\"')
-		ft_del_quotes(str, '\"');
-	if (str[ft_get_equal_sign_index(str)] == '\'')
-		ft_del_quotes(str, '\'');
+	equal_index = ft_get_equal_sign_index(str);
+	if (str[equal_index] == SYMBOL_QUOTE_DOUBLE)
+		ft_del_quotes(str, SYMBOL_QUOTE_DOUBLE);
+	if (str[equal_index] == SYMBOL_QUOTE)
+		ft_del_quotes(str, SYMBOL_QUOTE);
 	while (shell_data->envp[index])
 	{
 		if (ft_strncmp(shell_data->envp[index],
@@ -23,7 +25,7 @@ int	variable_exist(t_shell_data *shell_data, char *str)
 	return (0);
 }
 
-int	check_parameter(char *str)
+int	ft_check_export_param(char *str)
 {
 	int	index;
 
@@ -32,9 +34,9 @@ int	check_parameter(char *str)
 		return (ft_error_print_export(str));
 	if (ft_get_equal_sign_index(str) == 0)
 		return (EXIT_FAILURE);
-	if (str[0] == '=')
+	if (str[0] == SYMBOL_EQUAL)
 		return (ft_error_print_export(str));
-	while (str[index] != '=')
+	while (str[index] != SYMBOL_EQUAL)
 	{
 		if (ft_check_valid_identifier(str[index]))
 			return (ft_error_print_export(str));
@@ -43,7 +45,7 @@ int	check_parameter(char *str)
 	return (EXIT_SUCCESS);
 }
 
-char	**whileloop_add_var(char **arr, char **rtn, char *str)
+char	**ft_copy_env_with_new_var(char **arr, char **rtn, char *str)
 {
 	int	index;
 
@@ -67,44 +69,45 @@ char	**whileloop_add_var(char **arr, char **rtn, char *str)
 	return (rtn);
 }
 
-char	**add_var(char **arr, char *str)
+char	**ft_add_env_var(char **arr, char *str)
 {
-	char	**rtn;
+	char	**result;
 	size_t	index;
 
 	index = 0;
-	if (str[ft_get_equal_sign_index(str)] == '\"')
-		ft_del_quotes(str, '\"');
-	if (str[ft_get_equal_sign_index(str)] == '\'')
-		ft_del_quotes(str, '\'');
+	if (str[ft_get_equal_sign_index(str)] == SYMBOL_QUOTE_DOUBLE)
+		ft_del_quotes(str, SYMBOL_QUOTE_DOUBLE);
+	if (str[ft_get_equal_sign_index(str)] == SYMBOL_QUOTE)
+		ft_del_quotes(str, SYMBOL_QUOTE);
 	while (arr[index] != NULL)
 		index++;
-	rtn = ft_calloc(sizeof(char *), index + 2);
-	if (!rtn)
+	result = ft_calloc(index + 2, sizeof(char *));
+	if (!result)
 		return (NULL);
 	index = 0;
-	whileloop_add_var(arr, rtn, str);
-	return (rtn);
+	ft_copy_env_with_new_var(arr, result, str);
+	return (result);
 }
 
-int	ft_export(t_shell_data *shell_data, t_command_list *simple_cmd)
+int	ft_export(t_shell_data *shell_data, t_command_list *command_list)
 {
 	char	**tmp;
 	int		index;
 
 	index = 1;
-	if (!simple_cmd->str[1] || simple_cmd->str[1][0] == '\0')
-		ft_env(shell_data, simple_cmd);
+	if (!command_list->str[1] || command_list->str[1][0] == '\0')
+		ft_env(shell_data, command_list);
 	else
 	{
-		while (simple_cmd->str[index])
+		while (command_list->str[index])
 		{
-			if (check_parameter(simple_cmd->str[index]) == 0
-				&& variable_exist(shell_data, simple_cmd->str[index]) == 0)
+			if (ft_check_export_param(command_list->str[index]) == 0
+				&& ft_update_env_var(shell_data, command_list->str[index]) == 0)
 			{
-				if (simple_cmd->str[index])
+				if (command_list->str[index])
 				{
-					tmp = add_var(shell_data->envp, simple_cmd->str[index]);
+					tmp = ft_add_env_var(shell_data->envp,
+							command_list->str[index]);
 					ft_free_array(shell_data->envp);
 					shell_data->envp = tmp;
 				}

@@ -58,7 +58,7 @@ int	ft_error_print_command_not_found(char *str)
 
 int	ft_error_print_export(char *c)
 {
-	ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT "export: " COLOR_RESET,
+	ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET "export: ",
 		STDERR_FILENO);
 	if (c)
 	{
@@ -68,4 +68,13 @@ int	ft_error_print_export(char *c)
 	}
 	ft_putendl_fd("not a valid identifier", STDERR_FILENO);
 	return (EXIT_FAILURE);
+}
+
+void	ft_error_print_unset_slash_error(t_command_list *command_list)
+{
+	ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET,
+		STDERR_FILENO);
+	ft_putstr_fd("unset: '", STDERR_FILENO);
+	ft_putstr_fd(command_list->str[1], STDERR_FILENO);
+	ft_putendl_fd("': " MSG_ERR_UNSET_INVALID_ID, STDERR_FILENO);
 }

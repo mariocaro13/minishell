@@ -55,15 +55,24 @@ typedef struct s_shell_data
 	int				*pid;
 	bool			heredoc;
 	bool			reset;
+	char			*history_path;
 	t_shell_state	state;
 }	t_shell_data;
+
+typedef struct s_parser_data
+{
+	t_lexer_list	*lexer_list;
+	t_lexer_list	*redirections;
+	int				num_redirections;
+	t_shell_data	*shell_data;
+}	t_parser_data;
 
 typedef struct s_command_list
 {
 	char			**str;
 	int				(*builtin)(t_shell_data *, struct s_command_list *);
 	int				num_redirections;
-	char			*hd_file_name;
+	char			*heredoc_file_name;
 	t_lexer_list	*redirections;
 	t_command_list	*next;
 	t_command_list	*prev;

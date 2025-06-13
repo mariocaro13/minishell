@@ -1,87 +1,97 @@
 #include "minishell.h"
 
-char	**whileloop_del_var(char **arr, char **rtn, char *str)
+static int	ft_env_var_match(const char *env_entry, const char *var_name)
 {
-	int	index;
-	int	j;
+	size_t	len;
 
-	index = 0;
+	len = ft_strlen(var_name);
+	if (ft_strncmp(env_entry, var_name, len) == 0
+		&& env_entry[len] == SYMBOL_EQUAL)
+		return (EXIT_SUCCESS);
+	return (EXIT_FAILURE);
+}
+
+static int	ft_process_env_entries(char **envp, const char *var_name,
+	char **new_env)
+{
+	size_t	i;
+	size_t	j;
+
+	i = 0;
 	j = 0;
-	while (arr[index] != NULL)
+	while (envp[i])
 	{
-		if (!(ft_strncmp(arr[index], str, ft_get_equal_sign_index(arr[index]) - 1) == 0
-				&& str[ft_get_equal_sign_index(arr[index])] == '\0'
-				&& arr[index][ft_strlen(str)] == '='))
+		if (ft_env_var_match(envp[i], var_name) == EXIT_SUCCESS)
 		{
-			rtn[j] = ft_strdup(arr[index]);
-			if (rtn[j] == NULL)
-			{
-				ft_free_array(rtn);
-				return (rtn);
-			}
-			j++;
+			i++;
+			continue ;
 		}
-		index++;
+		new_env[j] = ft_strdup(envp[i]);
+		if (!new_env[j])
+			return (EXIT_FAILURE);
+		i++;
+		j++;
 	}
-	return (rtn);
+	new_env[j] = NULL;
+	return (EXIT_SUCCESS);
 }
 
-char	**del_var(char **arr, char *str)
+static char	**ft_remove_env_var(char **envp, const char *var_name)
 {
-	char	**rtn;
-	size_t	index;
+	size_t	total;
+	char	**new_env;
 
-	index = 0;
-	while (arr[index] != NULL)
-		index++;
-	rtn = ft_calloc(sizeof(char *), index + 1);
-	if (!rtn)
+	total = ft_count_envp(envp);
+	new_env = ft_calloc(total + 1, sizeof(char *));
+	if (!new_env)
 		return (NULL);
-	rtn = whileloop_del_var(arr, rtn, str);
-	return (rtn);
+	if (ft_process_env_entries(envp, var_name, new_env) != EXIT_SUCCESS)
+	{
+		ft_free_array(new_env);
+		return (NULL);
+	}
+	return (new_env);
 }
 
-int	unset_error(t_command_list *simple_cmd)
+static int	ft_unset_error(t_command_list *command_list)
 {
-	int		index;
+	int	i;
 
-	index = 0;
-	if (!simple_cmd->str[1])
+	if (!command_list->str[1])
 	{
-		ft_putendl_fd("minishell: unset: not enough arguments", STDERR_FILENO);
+		ft_putendl_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
+			MSG_ERR_UNSET_NOT_ENOUGH_ARGS, STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	while (simple_cmd->str[1][index])
+	i = 0;
+	while (command_list->str[1][i])
 	{
-		if (simple_cmd->str[1][index++] == '/')
+		if (command_list->str[1][i] == '/')
 		{
-			ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET "unset: `",
-				STDERR_FILENO);
-			ft_putstr_fd(simple_cmd->str[1], STDERR_FILENO);
-			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
+			ft_error_print_unset_slash_error(command_list);
 			return (EXIT_FAILURE);
 		}
+		i++;
 	}
-	if (ft_get_equal_sign_index(simple_cmd->str[1]) != 0)
+	if (ft_strchr(command_list->str[1], SYMBOL_EQUAL) != NULL)
 	{
-		ft_putendl_fd("minishell: unset: not a valid identifier",
-			STDERR_FILENO);
+		ft_putendl_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
+			MSG_ERR_UNSET_INVALID_ID, STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	return (EXIT_SUCCESS);
 }
 
-int	ft_unset(t_shell_data *shell_data, t_command_list *simple_cmd)
+int	ft_unset(t_shell_data *shell_data, t_command_list *command_list)
 {
-	char	**tmp;
+	char	**new_env;
 
-	if (unset_error(simple_cmd) == 1)
+	if (ft_unset_error(command_list) == EXIT_FAILURE)
 		return (EXIT_FAILURE);
-	else
-	{
-		tmp = del_var(shell_data->envp, simple_cmd->str[1]);
-		ft_free_array(shell_data->envp);
-		shell_data->envp = tmp;
-	}
+	new_env = ft_remove_env_var(shell_data->envp, command_list->str[1]);
+	if (!new_env)
+		return (EXIT_FAILURE);
+	ft_free_array(shell_data->envp);
+	shell_data->envp = new_env;
 	return (EXIT_SUCCESS);
 }

@@ -20,7 +20,7 @@ int	ft_get_fd_heredoc(t_shell_data *shell_data, int end[2],
 	if (shell_data->heredoc)
 	{
 		close(end[0]);
-		fd_in = open(cmd->hd_file_name, O_RDONLY);
+		fd_in = open(cmd->heredoc_file_name, O_RDONLY);
 	}
 	else
 		fd_in = end[0];

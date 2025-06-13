@@ -79,10 +79,11 @@ int	ft_handle_heredoc(t_shell_data *shell_data, t_command_list *cmd)
 	{
 		if (redir->token == REDIRECT_HEREDOC)
 		{
-			if (cmd->hd_file_name)
-				free(cmd->hd_file_name);
-			cmd->hd_file_name = ft_create_heredoc_filename();
-			result = ft_process_heredoc(shell_data, redir, cmd->hd_file_name);
+			if (cmd->heredoc_file_name)
+				free(cmd->heredoc_file_name);
+			cmd->heredoc_file_name = ft_create_heredoc_filename();
+			result = ft_process_heredoc(shell_data, redir,
+					cmd->heredoc_file_name);
 			if (result != EXIT_SUCCESS)
 			{
 				shell_data->state.error_num = 1;

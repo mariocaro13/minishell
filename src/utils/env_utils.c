@@ -46,3 +46,13 @@ char	**ft_split_env_paths(char **envp)
 		return (NULL);
 	return (paths);
 }
+
+size_t	ft_count_envp(char **envp)
+{
+	size_t	count;
+
+	count = 0;
+	while (envp[count])
+		count++;
+	return (count);
+}

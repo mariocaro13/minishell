@@ -7,12 +7,12 @@
         
 	- [ ] Builtins
 		- [x] ft_cd		✅
-		- [ ] ft_echo	✅
-		- [ ] ft_env	✅
-		- [ ] ft_exit	✅
-		- [ ] ft_export	✅
+		- [x] ft_echo	✅
+		- [x] ft_env	✅
+		- [x] ft_exit	✅
+		- [x] ft_export	✅
 		- [x] ft_pwd	✅
-		- [ ] ft_unset	❌
+		- [x] ft_unset	✅
        
 - ### SIGNALS:
 	- [x] Crtl + \ 
@@ -24,10 +24,15 @@
 
 - [ ] Headers
 
-- [ ] Errors:
-	- [ ] ft_unset.c  
-
 ## FIXME:
+
+> [!WARNING]
+> - [ ]  ft_exit:
+> cat | exit -> leak
+
+> [!IMPORTANT]
+> echo "'" o echo '"' no imprime las comillas, las comillas dentro de comillas se ignoran, esto creo que es bonus
+> Echarle un ojo
 
 > [!WARNING]
 > - [ ]  Readline:

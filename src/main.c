@@ -17,9 +17,13 @@ int	main(int argc, char **argv, char **envp)
 			STDERR_FILENO);
 		exit(EXIT_FAILURE);
 	}
-	ft_load_history_from_file(HISTORY_FILE);
+	shell_data.history_path = ft_make_history_path(shell_data.pwd);
+	if (!shell_data.history_path)
+		shell_data.history_path = ft_strdup(HISTORY_FILE);
+	ft_load_history_from_file(shell_data.history_path);
 	printf(MSG_WELCOME);
 	ft_shell_loop(&shell_data);
 	rl_clear_history();
+	free(shell_data.history_path);
 	return (EXIT_SUCCESS);
 }

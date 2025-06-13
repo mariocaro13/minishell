@@ -76,11 +76,11 @@ void	ft_add_path_to_env(t_shell_data *shell_data)
 	}
 }
 
-int	ft_cd(t_shell_data *shell_data, t_command_list *simple_cmd)
+int	ft_cd(t_shell_data *shell_data, t_command_list *command_list)
 {
 	int		exit_code;
 
-	if (!simple_cmd->str[1] || ft_strncmp(simple_cmd->str[1], "-", 1) == 0)
+	if (!command_list->str[1] || ft_strncmp(command_list->str[1], "-", 1) == 0)
 	{
 		ft_putendl_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
 			MSG_ERR_CD_ARGS, STDERR_FILENO);
@@ -88,12 +88,12 @@ int	ft_cd(t_shell_data *shell_data, t_command_list *simple_cmd)
 	}
 	else
 	{
-		exit_code = chdir(simple_cmd->str[1]);
+		exit_code = chdir(command_list->str[1]);
 		if (exit_code != 0)
 		{
 			ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
 				MSG_ERR_CD_FILE, STDERR_FILENO);
-			ft_putendl_fd(simple_cmd->str[1], STDERR_FILENO);
+			ft_putendl_fd(command_list->str[1], STDERR_FILENO);
 			return (EXIT_FAILURE);
 		}
 	}

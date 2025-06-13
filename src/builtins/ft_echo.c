@@ -1,6 +1,22 @@
 #include "minishell.h"
 
-void	print_lines(int index, char **str, int out)
+static bool	ft_is_n_option(const char *str)
+{
+	int	index;
+
+	if (!str || str[0] != '-')
+		return (false);
+	index = 1;
+	while (str[index])
+	{
+		if (str[index] != 'n')
+			return (false);
+		index++;
+	}
+	return (true);
+}
+
+void	ft_print_lines(int index, char **str, int out)
 {
 	while (str[index])
 	{
@@ -10,29 +26,21 @@ void	print_lines(int index, char **str, int out)
 	}
 }
 
-int	ft_echo(t_shell_data *shell_data, t_command_list *simple_cmd)
+int	ft_echo(t_shell_data *shell_data, t_command_list *command_list)
 {
 	int		index;
-	int		j;
-	bool	n_option;
+	bool	is_n_option;
 
-	index = 1;
-	n_option = false;
 	(void) shell_data;
-	while (simple_cmd->str[index] && simple_cmd->str[index][0] == '-'
-		&& simple_cmd->str[index][1] == 'n')
+	index = 1;
+	is_n_option = false;
+	while (command_list->str[index] && ft_is_n_option(command_list->str[index]))
 	{
-		j = 1;
-		while (simple_cmd->str[index][j] == 'n')
-			j++;
-		if (simple_cmd->str[index][j] == '\0')
-			n_option = true;
-		else
-			break ;
+		is_n_option = true;
 		index++;
 	}
-	print_lines(index, simple_cmd->str, STDOUT_FILENO);
-	if (n_option == false)
+	ft_print_lines(index, command_list->str, STDOUT_FILENO);
+	if (is_n_option == false)
 		ft_putchar_fd('\n', STDOUT_FILENO);
 	return (EXIT_SUCCESS);
 }

@@ -34,6 +34,7 @@ int		ft_shell_loop(t_shell_data *shell_data);
 // History
 void	ft_load_history_from_file(const char *filename);
 void	ft_save_history_to_file(const char *filename, const char *input);
-void	ft_add_to_history(const char *input);
+void	ft_add_to_history(const char *input, t_shell_data *shell_data);
+char	*ft_make_history_path(const char *pwd);
 
 #endif

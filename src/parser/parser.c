@@ -21,7 +21,7 @@ static int	ft_validate_current_lexer(t_shell_data *shell_data)
 	return (EXIT_SUCCESS);
 }
 
-static int	ft_process_current_lexer(t_shell_data	*shell_data)
+static int	ft_process_current_lexer(t_shell_data *shell_data)
 {
 	t_parser_data	parser_data;
 	t_command_list	*cmd_node;

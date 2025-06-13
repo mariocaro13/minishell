@@ -1,18 +1,6 @@
 #include "minishell.h"
 
-void	ft_free_shell_data(t_shell_data *shell_data)
-{
-	ft_free_array(shell_data->paths);
-	ft_free_array(shell_data->envp);
-	free(shell_data->args);
-	ft_command_list_clear(&shell_data->command_list);
-	free(shell_data->pwd);
-	free(shell_data->old_pwd);
-	if (shell_data->pipes)
-		free(shell_data->pid);
-}
-
-int	is_str_digit(char *str)
+static bool	ft_is_str_digit(char *str)
 {
 	int	index;
 
@@ -20,45 +8,45 @@ int	is_str_digit(char *str)
 	while (str[index])
 	{
 		if (!ft_isdigit(str[index]))
-			return (0);
+			return (false);
 		index++;
 	}
-	return (1);
+	return (true);
 }
 
-void	determine_exit_code(char **str)
+static void	ft_determine_exit_code(char **str)
 {
 	int	exit_code;
 
 	if (!str[1])
 		exit_code = 0;
-	else if (is_str_digit(str[1]))
+	else if (ft_is_str_digit(str[1]))
 		exit_code = ft_atoi(str[1]);
 	else
 	{
 		ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET "exit: ",
 			STDERR_FILENO);
 		ft_putstr_fd(str[1], STDERR_FILENO);
-		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
+		ft_putstr_fd(": numeric argument required.\n", STDERR_FILENO);
 		exit_code = 255;
 	}
 	ft_free_array(str);
 	exit(exit_code);
 }
 
-int	ft_exit(t_shell_data *shell_data, t_command_list *simple_cmd)
+int	ft_exit(t_shell_data *shell_data, t_command_list *command_list)
 {
-	char	**str;
+	char	**aux_str;
 
 	ft_putendl_fd(COLOR_YELLOW "exit" COLOR_RESET, STDERR_FILENO);
-	if (simple_cmd->str[1] && simple_cmd->str[2])
+	if (command_list->str[1] && command_list->str[2])
 	{
 		ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
-			"exit: too many arguments\n", STDERR_FILENO);
+			"exit: too many arguments.\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
-	str = ft_duplicate_string_array(simple_cmd->str);
+	aux_str = ft_duplicate_string_array(command_list->str);
 	ft_free_shell_data(shell_data);
-	determine_exit_code(str);
+	ft_determine_exit_code(aux_str);
 	return (EXIT_SUCCESS);
 }

@@ -1,14 +1,6 @@
 #ifndef PARSER_H
 # define PARSER_H
 
-typedef struct s_parser_data
-{
-	t_lexer_list	*lexer_list;
-	t_lexer_list	*redirections;
-	int				num_redirections;
-	t_shell_data	*shell_data;
-}	t_parser_data;
-
 // Parser
 int				ft_parse_lexer_list(t_shell_data *shell_data);
 t_parser_data	ft_init_parser_data(t_lexer_list *lexer_list,

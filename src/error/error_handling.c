@@ -4,6 +4,11 @@ void	ft_error_parser(int error, t_shell_data *shell_data,
 	t_lexer_list *lexer_list)
 {
 	ft_lexer_clear(&lexer_list);
+	if (shell_data->command_list)
+	{
+		ft_command_list_clear(&shell_data->command_list);
+		shell_data->command_list = NULL;
+	}
 	ft_error_handle_msg(error, shell_data);
 }
 

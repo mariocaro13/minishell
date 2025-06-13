@@ -35,9 +35,9 @@ char	*ft_build_prompt(t_shell_data *shell_data)
 
 	if (!shell_data || !shell_data->pwd)
 		return (NULL);
-	if (ft_strncmp(shell_data->pwd, "/home/", 6) == 0
-		&& ft_strchr(shell_data->pwd + 6, '/'))
-		to_show = ft_strjoin("~", ft_strchr(shell_data->pwd + 6, '/'));
+	if (ft_strncmp(shell_data->pwd, HOME, HOME_LEN) == 0
+		&& ft_strchr(shell_data->pwd + HOME_LEN, '/'))
+		to_show = ft_strjoin("~", ft_strchr(shell_data->pwd + HOME_LEN, '/'));
 	else
 		to_show = ft_strdup(shell_data->pwd);
 	if (!to_show)

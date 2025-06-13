@@ -29,10 +29,10 @@ void	ft_command_list_clear(t_command_list **command_list)
 			ft_free_array((*command_list)->str);
 			(*command_list)->str = NULL;
 		}
-		if ((*command_list)->hd_file_name)
+		if ((*command_list)->heredoc_file_name)
 		{
-			free((*command_list)->hd_file_name);
-			(*command_list)->hd_file_name = NULL;
+			free((*command_list)->heredoc_file_name);
+			(*command_list)->heredoc_file_name = NULL;
 		}
 		free(*command_list);
 		*command_list = next_node;

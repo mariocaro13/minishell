@@ -29,7 +29,7 @@ t_command_list	*ft_command_list_create_node(char **str,
 		return (NULL);
 	new_node->str = str;
 	new_node->builtin = ft_get_builtin_function(str[0]);
-	new_node->hd_file_name = NULL;
+	new_node->heredoc_file_name = NULL;
 	new_node->num_redirections = num_redirections;
 	new_node->redirections = redirections;
 	new_node->next = NULL;

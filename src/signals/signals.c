@@ -21,7 +21,8 @@ void	ft_sigint_handler(int signum)
 
 void	ft_sigquit_handler(int signum)
 {
-	ft_putstr_fd("Quit: ", STDERR_FILENO);
-	ft_putnbr_fd(signum, STDERR_FILENO);
-	ft_putchar_fd('\n', STDERR_FILENO);
+	(void)signum;
+	write(STDERR_FILENO, "\r", 1);
+	ft_putendl_fd(COLOR_YELLOW MSG_DEFAULT_PROMPT COLOR_RESET
+		"^\\Quit (core dumped)", STDERR_FILENO);
 }

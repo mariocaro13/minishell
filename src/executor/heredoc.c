@@ -68,22 +68,22 @@ int	ft_process_heredoc(t_shell_data *shell_data, t_lexer_list *heredoc,
 	return (result);
 }
 
-int	ft_handle_heredoc(t_shell_data *shell_data, t_command_list *cmd)
+int	ft_handle_heredoc(t_shell_data *shell_data, t_command_list *command_list)
 {
 	t_lexer_list	*redir;
 	int				result;
 
-	redir = cmd->redirections;
+	redir = command_list->redirections;
 	result = EXIT_SUCCESS;
 	while (redir)
 	{
 		if (redir->token == REDIRECT_HEREDOC)
 		{
-			if (cmd->heredoc_file_name)
-				free(cmd->heredoc_file_name);
-			cmd->heredoc_file_name = ft_create_heredoc_filename();
+			if (command_list->heredoc_file_name)
+				free(command_list->heredoc_file_name);
+			command_list->heredoc_file_name = ft_create_heredoc_filename();
 			result = ft_process_heredoc(shell_data, redir,
-					cmd->heredoc_file_name);
+					command_list->heredoc_file_name);
 			if (result != EXIT_SUCCESS)
 			{
 				shell_data->state.error_num = 1;

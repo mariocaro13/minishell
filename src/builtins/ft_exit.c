@@ -38,7 +38,8 @@ int	ft_exit(t_shell_data *shell_data, t_command_list *command_list)
 {
 	char	**aux_str;
 
-	ft_putendl_fd(COLOR_YELLOW "exit" COLOR_RESET, STDERR_FILENO);
+	ft_putendl_fd(COLOR_YELLOW MSG_DEFAULT_PROMPT COLOR_RESET
+		MSG_EXIT, STDOUT_FILENO);
 	if (command_list->str[1] && command_list->str[2])
 	{
 		ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
@@ -46,7 +47,7 @@ int	ft_exit(t_shell_data *shell_data, t_command_list *command_list)
 		return (EXIT_FAILURE);
 	}
 	aux_str = ft_duplicate_string_array(command_list->str);
-	ft_free_shell_data(shell_data);
 	ft_determine_exit_code(aux_str);
+	ft_free_shell_data(shell_data);
 	return (EXIT_SUCCESS);
 }

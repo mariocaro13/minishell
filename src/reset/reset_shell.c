@@ -14,7 +14,6 @@ int	ft_reset_shell_state(t_shell_data *shell_data)
 int	ft_reset_shell_loop(t_shell_data *shell_data)
 {
 	ft_command_list_clear(&shell_data->command_list);
-	ft_lexer_clear(&shell_data->lexer_list);
 	ft_clean_str(&shell_data->args);
 	ft_clean_str((char **)&shell_data->pid);
 	if (shell_data->paths)

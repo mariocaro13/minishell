@@ -5,7 +5,8 @@ static int	ft_handle_input_line(t_shell_data *shell_data)
 	shell_data->args = ft_get_trimmed_line(shell_data);
 	if (!shell_data->args)
 	{
-		ft_putendl_fd(COLOR_YELLOW MSG_EXIT COLOR_RESET, STDOUT_FILENO);
+		ft_putendl_fd(COLOR_YELLOW MSG_DEFAULT_PROMPT COLOR_RESET
+			MSG_EXIT, STDOUT_FILENO);
 		exit(EXIT_SUCCESS);
 	}
 	if (shell_data->args[0] == '\0')

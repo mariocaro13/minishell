@@ -3,16 +3,19 @@
 char	*ft_expand_str(t_shell_data *shell_data, char *str)
 {
 	char	*tmp;
-	size_t	dollar_index;
+	char	*dollar_ptr;
 
 	tmp = NULL;
-	dollar_index = ft_get_dollar_sign_index(str);
-	if (dollar_index > 1 && dollar_index != 0 && str[dollar_index] != '\0'
-		&& str[dollar_index - 2] != SYMBOL_QUOTE)
+	dollar_ptr = ft_strchr(str, SYMBOL_DOLLAR);
+	if (dollar_ptr != NULL)
 	{
-		tmp = ft_detect_dollar_sign(shell_data, str);
-		free(str);
-		str = tmp;
+		if (dollar_ptr == str
+			|| (dollar_ptr > str && *(dollar_ptr - 2) != SYMBOL_QUOTE))
+		{
+			tmp = ft_detect_dollar_sign(shell_data, str);
+			free(str);
+			str = tmp;
+		}
 	}
 	str = ft_apply_del_quotes(str, SYMBOL_QUOTE_DOUBLE);
 	str = ft_apply_del_quotes(str, SYMBOL_QUOTE);

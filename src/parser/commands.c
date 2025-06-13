@@ -43,7 +43,7 @@ static char	**ft_build_command_arguments(t_parser_data *parser_data)
 	return (args);
 }
 
-t_commands_list	*ft_build_command(t_parser_data *parser_data)
+t_command_list	*ft_build_command(t_parser_data *parser_data)
 {
 	char	**args;
 

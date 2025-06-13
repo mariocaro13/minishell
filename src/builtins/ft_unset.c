@@ -41,7 +41,7 @@ char	**del_var(char **arr, char *str)
 	return (rtn);
 }
 
-int	unset_error(t_commands_list *simple_cmd)
+int	unset_error(t_command_list *simple_cmd)
 {
 	int		index;
 
@@ -55,7 +55,8 @@ int	unset_error(t_commands_list *simple_cmd)
 	{
 		if (simple_cmd->str[1][index++] == '/')
 		{
-			ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET "unset: `", STDERR_FILENO);
+			ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET "unset: `",
+				STDERR_FILENO);
 			ft_putstr_fd(simple_cmd->str[1], STDERR_FILENO);
 			ft_putendl_fd("': not a valid identifier", STDERR_FILENO);
 			return (EXIT_FAILURE);
@@ -70,7 +71,7 @@ int	unset_error(t_commands_list *simple_cmd)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_unset(t_shell_data *shell_data, t_commands_list *simple_cmd)
+int	ft_unset(t_shell_data *shell_data, t_command_list *simple_cmd)
 {
 	char	**tmp;
 

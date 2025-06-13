@@ -4,7 +4,7 @@
 char	**ft_expand_command_args(t_shell_data *shell_data, char **str);
 char	*ft_expand_str(t_shell_data *shell_data, char *str);
 void	ft_expander_caller(t_shell_data *shell_data,
-			t_commands_list **command_list);
+			t_command_list **command_list);
 
 // Dollar Sign
 char	*ft_detect_dollar_sign(t_shell_data *shell_data, char *str);

@@ -68,7 +68,7 @@ int	ft_process_heredoc(t_shell_data *shell_data, t_lexer_list *heredoc,
 	return (result);
 }
 
-int	ft_handle_heredoc(t_shell_data *shell_data, t_commands_list *cmd)
+int	ft_handle_heredoc(t_shell_data *shell_data, t_command_list *cmd)
 {
 	t_lexer_list	*redir;
 	int				result;

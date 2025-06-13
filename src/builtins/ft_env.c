@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-int	ft_env(t_shell_data *shell_data, t_commands_list *simple_cmd)
+int	ft_env(t_shell_data *shell_data, t_command_list *simple_cmd)
 {
 	int		index;
 

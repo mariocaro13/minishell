@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 int	(*ft_get_builtin_function(char *str))(t_shell_data *shell_data,
-	t_commands_list *simple_cmd)
+	t_command_list *simple_cmd)
 {
 	if (!str)
 		return (NULL);
@@ -22,15 +22,23 @@ int	(*ft_get_builtin_function(char *str))(t_shell_data *shell_data,
 	return (NULL);
 }
 
-void	change_path(t_shell_data *shell_data)
+void	ft_change_path(t_shell_data *shell_data)
 {
 	char	*tmp;
 
-	tmp = ft_strdup(shell_data->pwd);
+	if (shell_data->pwd)
+		tmp = ft_strdup(shell_data->pwd);
+	else
+		tmp = ft_strdup("");
 	free(shell_data->old_pwd);
 	shell_data->old_pwd = tmp;
 	free(shell_data->pwd);
-	shell_data->pwd = getcwd(NULL, sizeof(NULL));
+	shell_data->pwd = getcwd(NULL, 0);
+	if (!shell_data->pwd)
+	{
+		perror("Error: getcwd");
+		shell_data->pwd = ft_strdup("");
+	}
 }
 
 size_t	ft_get_equal_sign_index(char *str)

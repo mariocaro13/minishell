@@ -1,9 +1,9 @@
 #include "minishell.h"
 
-t_commands_list	*ft_build_command_node(t_shell_data *shell_data,
+t_command_list	*ft_build_command_node(t_shell_data *shell_data,
 	t_parser_data *parser_data)
 {
-	t_commands_list	*cmd_node;
+	t_command_list	*cmd_node;
 
 	*parser_data = ft_init_parser_data(shell_data->lexer_list, shell_data);
 	cmd_node = ft_build_command(parser_data);
@@ -11,7 +11,7 @@ t_commands_list	*ft_build_command_node(t_shell_data *shell_data,
 }
 
 void	ft_command_list_append_node(t_shell_data *shell_data,
-	t_commands_list *cmd_node)
+	t_command_list *cmd_node)
 {
 	if (!shell_data->command_list)
 		shell_data->command_list = cmd_node;
@@ -19,12 +19,12 @@ void	ft_command_list_append_node(t_shell_data *shell_data,
 		ft_command_list_add_node_back(&shell_data->command_list, cmd_node);
 }
 
-t_commands_list	*ft_command_list_create_node(char **str,
+t_command_list	*ft_command_list_create_node(char **str,
 	int num_redirections, t_lexer_list *redirections)
 {
-	t_commands_list	*new_node;
+	t_command_list	*new_node;
 
-	new_node = (t_commands_list *)malloc(sizeof(t_commands_list));
+	new_node = (t_command_list *)malloc(sizeof(t_command_list));
 	if (!new_node)
 		return (NULL);
 	new_node->str = str;
@@ -37,10 +37,10 @@ t_commands_list	*ft_command_list_create_node(char **str,
 	return (new_node);
 }
 
-void	ft_command_list_add_node_back(t_commands_list **command_list,
-	t_commands_list *new_node)
+void	ft_command_list_add_node_back(t_command_list **command_list,
+	t_command_list *new_node)
 {
-	t_commands_list	*tmp;
+	t_command_list	*tmp;
 
 	tmp = *command_list;
 	if (*command_list == NULL)
@@ -54,7 +54,7 @@ void	ft_command_list_add_node_back(t_commands_list **command_list,
 	new_node->prev = tmp;
 }
 
-t_commands_list	*ft_command_list_get_first(t_commands_list *map)
+t_command_list	*ft_command_list_get_first(t_command_list *map)
 {
 	int	index;
 

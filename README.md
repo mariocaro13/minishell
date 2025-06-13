@@ -6,6 +6,13 @@
 	- [x] Redirections  
         
 	- [ ] Builtins
+		- [x] ft_cd		✅
+		- [ ] ft_echo	✅
+		- [ ] ft_env	✅
+		- [ ] ft_exit	✅
+		- [ ] ft_export	✅
+		- [x] ft_pwd	✅
+		- [ ] ft_unset	❌
        
 - ### SIGNALS:
 	- [x] Crtl + \ 
@@ -18,8 +25,6 @@
 - [ ] Headers
 
 - [ ] Errors:
-	- [ ] ft_exit.c  
-	- [ ] ft_cd.c  
 	- [ ] ft_unset.c  
 
 ## FIXME:

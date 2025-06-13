@@ -18,7 +18,8 @@ char	*ft_del_quotes_value(char *str);
 char	*ft_apply_del_quotes(char *str, char quote_symbol);
 
 // input_utils
-char	*ft_get_trimmed_line(void);
+char	*ft_get_trimmed_line(t_shell_data *shell_data);
+char	*ft_build_prompt(t_shell_data *shell_data);
 
 // str_utils
 char	*ft_join_split_str(char **split_str, char *new_str);
@@ -34,8 +35,15 @@ int		ft_append_slash_to_paths(char **paths);
 int		ft_strip_env_prefix(char **dest, char *env_entry, size_t prefix_len);
 char	*ft_get_env_path(char **envp);
 char	**ft_split_env_paths(char **envp);
+int		ft_update_dir_from_env(t_shell_data *shell_data,
+			const char *prefix, size_t prefix_len, char **dest);
 
 // pipes_utils
 void	ft_remove_leading_pipe(t_shell_data *shell_data);
 int		ft_count_pipes_in_lexer(t_lexer_list *lexer_list);
+
+// clean
+void	ft_clean_shell_resources(t_shell_data *shell_data);
+void	ft_clean_str(char **str);
+
 #endif

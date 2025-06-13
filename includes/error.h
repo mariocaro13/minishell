@@ -1,9 +1,6 @@
 #ifndef ERROR_H
 # define ERROR_H
 
-// clean
-void	ft_clean_shell_resources(t_shell_data *shell_data);
-
 // error handling
 void	ft_error_parser(int error, t_shell_data *shell_data,
 			t_lexer_list *lexer_list);

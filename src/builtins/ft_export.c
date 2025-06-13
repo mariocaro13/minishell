@@ -87,7 +87,7 @@ char	**add_var(char **arr, char *str)
 	return (rtn);
 }
 
-int	ft_export(t_shell_data *shell_data, t_commands_list *simple_cmd)
+int	ft_export(t_shell_data *shell_data, t_command_list *simple_cmd)
 {
 	char	**tmp;
 	int		index;

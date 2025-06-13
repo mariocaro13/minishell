@@ -1,39 +1,56 @@
 #include "minishell.h"
 
-char	*find_path_ret(char *str, t_shell_data *shell_data)
+char	*ft_get_path_ret(const char *env_var, t_shell_data *shell_data)
 {
-	int	index;
+	int		index;
+	size_t	var_len;
+	char	*result;
 
 	index = 0;
+	var_len = ft_strlen(env_var);
 	while (shell_data->envp[index])
 	{
-		if (!ft_strncmp(shell_data->envp[index], str, ft_strlen(str)))
-			return (ft_substr(shell_data->envp[index], ft_strlen(str),
-					ft_strlen(shell_data->envp[index]) - ft_strlen(str)));
+		if (!ft_strncmp(shell_data->envp[index], env_var, var_len))
+		{
+			if (ft_strip_env_prefix(&result, shell_data->envp[index], var_len)
+				== EXIT_SUCCESS)
+				return (result);
+			else
+				return (NULL);
+		}
 		index++;
 	}
 	return (NULL);
 }
 
-int	specific_path(t_shell_data *shell_data, char *str)
+int	ft_get_specific_path(t_shell_data *shell_data, char *env_var)
 {
-	char	*tmp;
-	int		ret;
+	char	*env_value;
+	char	*env_var_print;
+	int		exit_code;
 
-	tmp = find_path_ret(str, shell_data);
-	ret = chdir(tmp);
-	free(tmp);
-	if (ret != 0)
+	env_value = ft_get_path_ret(env_var, shell_data);
+	if (!env_value)
 	{
-		str = ft_substr(str, 0, ft_strlen(str) - 1);
-		ft_putstr_fd(str, STDERR_FILENO);
-		free(str);
+		env_var_print = ft_substr(env_var, 0, ft_strlen(env_var) - 1);
+		ft_putstr_fd(env_var_print, STDERR_FILENO);
 		ft_putendl_fd(" not set", STDERR_FILENO);
+		free(env_var_print);
+		return (-1);
 	}
-	return (ret);
+	exit_code = chdir(env_value);
+	free(env_value);
+	if (exit_code != 0)
+	{
+		env_var_print = ft_substr(env_var, 0, ft_strlen(env_var) - 1);
+		ft_putstr_fd(env_var_print, STDERR_FILENO);
+		ft_putendl_fd(" not set", STDERR_FILENO);
+		free(env_var_print);
+	}
+	return (exit_code);
 }
 
-void	add_path_to_env(t_shell_data *shell_data)
+void	ft_add_path_to_env(t_shell_data *shell_data)
 {
 	int		index;
 	char	*tmp;
@@ -41,15 +58,17 @@ void	add_path_to_env(t_shell_data *shell_data)
 	index = 0;
 	while (shell_data->envp[index])
 	{
-		if (!ft_strncmp(shell_data->envp[index], "PWD=", 4))
+		if (!ft_strncmp(shell_data->envp[index], PWD_PREFIX, PWD_PREFIX_LEN))
 		{
-			tmp = ft_strjoin("PWD=", shell_data->pwd);
+			tmp = ft_strjoin(PWD_PREFIX, shell_data->pwd);
 			free(shell_data->envp[index]);
 			shell_data->envp[index] = tmp;
 		}
-		else if (!ft_strncmp(shell_data->envp[index], "OLDPWD=", 7) && shell_data->old_pwd)
+		else if (!ft_strncmp(shell_data->envp[index], OLDPWD_PREFIX,
+				OLDPWD_PREFIX_LEN)
+			&& shell_data->old_pwd)
 		{
-			tmp = ft_strjoin("OLDPWD=", shell_data->old_pwd);
+			tmp = ft_strjoin(OLDPWD_PREFIX, shell_data->old_pwd);
 			free(shell_data->envp[index]);
 			shell_data->envp[index] = tmp;
 		}
@@ -57,27 +76,31 @@ void	add_path_to_env(t_shell_data *shell_data)
 	}
 }
 
-int	ft_cd(t_shell_data *shell_data, t_commands_list *simple_cmd)
+int	ft_cd(t_shell_data *shell_data, t_command_list *simple_cmd)
 {
-	int		ret;
+	int		exit_code;
 
-	if (!simple_cmd->str[1])
-		ret = specific_path(shell_data, "HOME=");
-	else if (ft_strncmp(simple_cmd->str[1], "-", 1) == 0)
-		ret = specific_path(shell_data, "OLDPWD=");
+	if (!simple_cmd->str[1] || ft_strncmp(simple_cmd->str[1], "-", 1) == 0)
+	{
+		ft_putendl_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
+			MSG_ERR_CD_ARGS, STDERR_FILENO);
+		return (EXIT_FAILURE);
+	}
 	else
 	{
-		ret = chdir(simple_cmd->str[1]);
-		if (ret != 0)
+		exit_code = chdir(simple_cmd->str[1]);
+		if (exit_code != 0)
 		{
-			ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET, STDERR_FILENO);
-			ft_putstr_fd(simple_cmd->str[1], STDERR_FILENO);
-			perror(" ");
+			ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
+				MSG_ERR_CD_FILE, STDERR_FILENO);
+			ft_putendl_fd(simple_cmd->str[1], STDERR_FILENO);
+			return (EXIT_FAILURE);
 		}
 	}
-	if (ret != 0)
-		return (EXIT_FAILURE);
-	change_path(shell_data);
-	add_path_to_env(shell_data);
+	if (exit_code == 0)
+	{
+		ft_change_path(shell_data);
+		ft_add_path_to_env(shell_data);
+	}
 	return (EXIT_SUCCESS);
 }

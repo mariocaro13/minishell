@@ -2,8 +2,8 @@
 
 void	ft_error_print_msg_token(t_token token)
 {
-	ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET MSG_ERR_SYNTAX_TOKEN,
-		STDERR_FILENO);
+	ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
+		MSG_ERR_SYNTAX_TOKEN, STDERR_FILENO);
 	if (token == REDIRECT_OUT)
 		ft_putstr_fd(SYMBOL_CHAR_GREATER_THAN, STDERR_FILENO);
 	else if (token == REDIRECT_OUT_APPEND)
@@ -21,7 +21,7 @@ void	ft_error_print_msg_token(t_token token)
 
 int	ft_error_handle_msg(int error_type, t_shell_data *shell_data)
 {
-	ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET,
+	ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET,
 		STDERR_FILENO);
 	if (error_type == ERR_OPEN_FD)
 		ft_putstr_fd(MSG_ERR_OPEN_FD, STDERR_FILENO);
@@ -49,7 +49,8 @@ int	ft_error_handle_msg(int error_type, t_shell_data *shell_data)
 
 int	ft_error_print_command_not_found(char *str)
 {
-	ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET, STDERR_FILENO);
+	ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET,
+		STDERR_FILENO);
 	ft_putstr_fd(str, STDERR_FILENO);
 	ft_putstr_fd(MSG_ERR_CMD_NOT_FOUND, STDERR_FILENO);
 	return (127);
@@ -57,7 +58,7 @@ int	ft_error_print_command_not_found(char *str)
 
 int	ft_error_print_export(char *c)
 {
-	ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT "export: " COLOR_RESET,
+	ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT "export: " COLOR_RESET,
 		STDERR_FILENO);
 	if (c)
 	{

@@ -21,8 +21,8 @@ int	ft_handle_infile(char *file_name)
 	fd = open(file_name, O_RDONLY);
 	if (fd < 0)
 	{
-		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET MSG_ERR_REDIRECT_IN,
-			STDERR_FILENO);
+		ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
+			MSG_ERR_REDIRECT_IN, STDERR_FILENO);
 		ft_putstr_fd(file_name, STDERR_FILENO);
 		ft_putstr_fd("\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
@@ -31,8 +31,8 @@ int	ft_handle_infile(char *file_name)
 	{
 		if (dup2(fd, STDIN_FILENO) < 0)
 		{
-			ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET MSG_ERR_PIPE,
-				STDERR_FILENO);
+			ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
+				MSG_ERR_PIPE, STDERR_FILENO);
 			close(fd);
 			return (EXIT_FAILURE);
 		}
@@ -48,16 +48,16 @@ int	ft_handle_outfile(t_lexer_list *redirection)
 	fd = ft_check_append_outfile(redirection);
 	if (fd < 0)
 	{
-		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET MSG_ERR_REDIRECT_OUT,
-			STDERR_FILENO);
+		ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
+			MSG_ERR_REDIRECT_OUT, STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	if (fd != STDOUT_FILENO)
 	{
 		if (dup2(fd, STDOUT_FILENO) < 0)
 		{
-			ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET MSG_ERR_PIPE,
-				STDERR_FILENO);
+			ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
+				MSG_ERR_PIPE, STDERR_FILENO);
 			close(fd);
 			return (EXIT_FAILURE);
 		}
@@ -66,7 +66,7 @@ int	ft_handle_outfile(t_lexer_list *redirection)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_handle_redirections(t_commands_list *cmd)
+int	ft_handle_redirections(t_command_list *cmd)
 {
 	t_lexer_list	*current;
 

@@ -1,26 +1,48 @@
 #include "minishell.h"
 
-int	ft_find_command(t_commands_list *command_list, t_shell_data *shell_data)
+static int	ft_try_direct_exec(t_command_list *command_list,
+	t_shell_data *shell_data)
 {
-	int		index;
-	char	*mycmd;
-
-	index = 0;
-	command_list->str = ft_resplit_str(command_list->str);
 	if (!access(command_list->str[0], F_OK))
 		execve(command_list->str[0], command_list->str, shell_data->envp);
-	while (shell_data->paths[index])
+	return (-1);
+}
+
+static int	ft_try_path_exec(t_command_list *command_list,
+	t_shell_data *shell_data)
+{
+	int		index;
+	char	*full_command;
+
+	index = 0;
+	while (shell_data->paths[index] != NULL)
 	{
-		mycmd = ft_strjoin(shell_data->paths[index], command_list->str[0]);
-		if (!access(mycmd, F_OK))
-			execve(mycmd, command_list->str, shell_data->envp);
-		free(mycmd);
+		full_command = ft_strjoin(shell_data->paths[index],
+				command_list->str[0]);
+		if (full_command)
+		{
+			if (!access(full_command, F_OK))
+				execve(full_command, command_list->str, shell_data->envp);
+			free(full_command);
+		}
 		index++;
 	}
+	return (-1);
+}
+
+int	ft_find_command(t_command_list *command_list, t_shell_data *shell_data)
+{
+	command_list->str = ft_resplit_str(command_list->str);
+	if (!command_list->str || !command_list->str[0])
+		return (ft_error_print_command_not_found(""));
+	ft_try_direct_exec(command_list, shell_data);
+	if (!shell_data->paths)
+		return (ft_error_print_command_not_found(command_list->str[0]));
+	ft_try_path_exec(command_list, shell_data);
 	return (ft_error_print_command_not_found(command_list->str[0]));
 }
 
-int	ft_execute_command(t_commands_list *command_list, t_shell_data *shell_data)
+int	ft_execute_command(t_command_list *command_list, t_shell_data *shell_data)
 {
 	int	exit_code;
 
@@ -41,7 +63,7 @@ int	ft_execute_command(t_commands_list *command_list, t_shell_data *shell_data)
 	return (exit_code);
 }
 
-void	ft_dup_command(t_commands_list *command_list, t_shell_data *shell_data,
+void	ft_dup_command(t_command_list *command_list, t_shell_data *shell_data,
 	int pipe_fd[2], int fd_in)
 {
 	if (command_list->prev && (dup2(fd_in, STDIN_FILENO) < 0))

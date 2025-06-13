@@ -10,7 +10,7 @@ void	print_lines(int index, char **str, int out)
 	}
 }
 
-int	ft_echo(t_shell_data *shell_data, t_commands_list *simple_cmd)
+int	ft_echo(t_shell_data *shell_data, t_command_list *simple_cmd)
 {
 	int		index;
 	int		j;

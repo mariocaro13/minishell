@@ -5,7 +5,7 @@ extern bool						g_is_in_heredoc;
 
 // Forwards declarations
 typedef struct s_lexer_list		t_lexer_list;
-typedef struct s_commands_list	t_commands_list;
+typedef struct s_command_list	t_command_list;
 
 /**
  * @struct s_shell_state
@@ -47,7 +47,7 @@ typedef struct s_shell_data
 	char			*args;
 	char			**paths;
 	char			**envp;
-	t_commands_list	*command_list;
+	t_command_list	*command_list;
 	t_lexer_list	*lexer_list;
 	char			*pwd;
 	char			*old_pwd;
@@ -58,16 +58,16 @@ typedef struct s_shell_data
 	t_shell_state	state;
 }	t_shell_data;
 
-typedef struct s_commands_list
+typedef struct s_command_list
 {
 	char			**str;
-	int				(*builtin)(t_shell_data *, struct s_commands_list *);
+	int				(*builtin)(t_shell_data *, struct s_command_list *);
 	int				num_redirections;
 	char			*hd_file_name;
 	t_lexer_list	*redirections;
-	t_commands_list	*next;
-	t_commands_list	*prev;
-}	t_commands_list;
+	t_command_list	*next;
+	t_command_list	*prev;
+}	t_command_list;
 
 typedef enum e_token
 {

@@ -36,7 +36,8 @@ void	determine_exit_code(char **str)
 		exit_code = ft_atoi(str[1]);
 	else
 	{
-		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET "exit: ", STDERR_FILENO);
+		ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET "exit: ",
+			STDERR_FILENO);
 		ft_putstr_fd(str[1], STDERR_FILENO);
 		ft_putstr_fd(": numeric argument required\n", STDERR_FILENO);
 		exit_code = 255;
@@ -45,14 +46,15 @@ void	determine_exit_code(char **str)
 	exit(exit_code);
 }
 
-int	ft_exit(t_shell_data *shell_data, t_commands_list *simple_cmd)
+int	ft_exit(t_shell_data *shell_data, t_command_list *simple_cmd)
 {
 	char	**str;
 
 	ft_putendl_fd(COLOR_YELLOW "exit" COLOR_RESET, STDERR_FILENO);
 	if (simple_cmd->str[1] && simple_cmd->str[2])
 	{
-		ft_putstr_fd(COLOR_RED_BOLD MSG_PROMPT COLOR_RESET "exit: too many arguments\n", STDERR_FILENO);
+		ft_putstr_fd(COLOR_RED_BOLD MSG_DEFAULT_PROMPT COLOR_RESET
+			"exit: too many arguments\n", STDERR_FILENO);
 		return (EXIT_FAILURE);
 	}
 	str = ft_duplicate_string_array(simple_cmd->str);

@@ -10,14 +10,14 @@ int	ft_init_shell_envp(t_shell_data *shell_data, char **envp)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_init_env_paths(t_shell_data *shell_state)
+int	ft_init_env_paths(t_shell_data *shell_data)
 {
-	if (!shell_state || !shell_state->envp)
+	if (!shell_data || !shell_data->envp)
 		return (EXIT_FAILURE);
-	shell_state->paths = ft_split_env_paths(shell_state->envp);
-	if (!shell_state->paths)
+	shell_data->paths = ft_split_env_paths(shell_data->envp);
+	if (!shell_data->paths)
 		return (EXIT_FAILURE);
-	if (ft_append_slash_to_paths(shell_state->paths) != EXIT_SUCCESS)
+	if (ft_append_slash_to_paths(shell_data->paths) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);
 	return (EXIT_SUCCESS);
 }

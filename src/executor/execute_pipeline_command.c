@@ -1,7 +1,7 @@
 #include "minishell.h"
 
 int	ft_fork(t_shell_data *shell_data, int pipe_fd[2],
-	int fd_in, t_commands_list *command)
+	int fd_in, t_command_list *command)
 {
 	static int	index = 0;
 

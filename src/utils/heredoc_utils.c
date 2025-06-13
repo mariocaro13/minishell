@@ -13,7 +13,7 @@ char	*ft_create_heredoc_filename(void)
 }
 
 int	ft_get_fd_heredoc(t_shell_data *shell_data, int end[2],
-	t_commands_list *cmd)
+	t_command_list *cmd)
 {
 	int	fd_in;
 

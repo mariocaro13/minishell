@@ -47,7 +47,7 @@ char	**ft_expand_command_args(t_shell_data *shell_data, char **str)
 }
 
 static void	ft_expand_command_redirections(t_shell_data *shell_data,
-	t_commands_list *command_list)
+	t_command_list *command_list)
 {
 	t_lexer_list	*current;
 
@@ -63,7 +63,7 @@ static void	ft_expand_command_redirections(t_shell_data *shell_data,
 }
 
 void	ft_expander_caller(t_shell_data *shell_data,
-	t_commands_list **command_list)
+	t_command_list **command_list)
 {
 	if (!command_list || !(*command_list))
 		return ;

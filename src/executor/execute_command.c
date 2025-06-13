@@ -1,6 +1,6 @@
 #include "minishell.h"
 
-static bool	ft_is_builtin_command(t_commands_list *command)
+static bool	ft_is_builtin_command(t_command_list *command)
 {
 	return (command->builtin == ft_cd
 		|| command->builtin == ft_exit
@@ -8,7 +8,7 @@ static bool	ft_is_builtin_command(t_commands_list *command)
 		|| command->builtin == ft_unset);
 }
 
-static int	ft_run_builtin(t_commands_list *command, t_shell_data *shell_data)
+static int	ft_run_builtin(t_command_list *command, t_shell_data *shell_data)
 {
 	return (command->builtin(shell_data, command));
 }
@@ -33,7 +33,7 @@ static int	ft_process_exit_status(int status, t_shell_data *shell_data)
 	return (EXIT_FAILURE);
 }
 
-static int	ft_run_command(t_commands_list *command, t_shell_data *shell_data)
+static int	ft_run_command(t_command_list *command, t_shell_data *shell_data)
 {
 	int	pid;
 	int	status;
@@ -53,7 +53,7 @@ static int	ft_run_command(t_commands_list *command, t_shell_data *shell_data)
 	return (ft_process_exit_status(status, shell_data));
 }
 
-void	ft_handle_command(t_commands_list *command, t_shell_data *shell_data)
+void	ft_handle_command(t_command_list *command, t_shell_data *shell_data)
 {
 	ft_expander_caller(shell_data, &shell_data->command_list);
 	if (ft_is_builtin_command(command))

@@ -36,11 +36,14 @@
 
 # define PWD_PREFIX "PWD="
 # define PWD_PREFIX_LEN 4
+
 # define OLDPWD_PREFIX "OLDPWD="
 # define OLDPWD_PREFIX_LEN 7
 
 # define PATH_PREFIX "PATH="
 # define PATH_PREFIX_LEN 5
+
+# define HOME_PREFIX "HOME="
 
 # define EXPORT "export"
 # define EXPORT_LEN 6

@@ -55,7 +55,7 @@ t_command_list	*ft_build_command(t_parser_data *parser_data)
 	args = ft_build_command_arguments(parser_data);
 	if (!args)
 		return (NULL);
-	node  = ft_command_list_create_node(args,
+	node = ft_command_list_create_node(args,
 			parser_data->num_redirections,
 			parser_data->redirections);
 	if (!node)

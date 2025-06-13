@@ -5,7 +5,7 @@
         
 	- [x] Redirections  
         
-	- [ ] Builtins
+	- [x] Builtins
 		- [x] ft_cd		✅
 		- [x] ft_echo	✅
 		- [x] ft_env	✅
@@ -26,15 +26,15 @@
 
 ## FIXME:
 
-> [!WARNING]
+> [!CAUTION]
 > - [ ]  ft_exit:
 > cat | exit -> leak
 
-> [!IMPORTANT]
+> [!WARNING]
 > echo "'" o echo '"' no imprime las comillas, las comillas dentro de comillas se ignoran, esto creo que es bonus
 > Echarle un ojo
 
-> [!WARNING]
+> [!IMPORTANT]
 > - [ ]  Readline:
 > 1. Write something like: ⬇️  
 > `ls > out| cat | cat -e`

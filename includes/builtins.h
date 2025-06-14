@@ -16,8 +16,6 @@ int		ft_env(t_shell_data *shell_data, t_command_list *command_list);
 
 int		ft_exit(t_shell_data *shell_data, t_command_list *command_list);
 
-int		mini_continue(t_shell_data *shell_data, t_command_list *command_list);
-
 size_t	ft_get_equal_sign_index(char *str);
 int		ft_check_valid_identifier(char c);
 

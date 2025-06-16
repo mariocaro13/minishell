@@ -1,56 +1,16 @@
 #include "minishell.h"
 
-char	*ft_get_path_ret(const char *env_var, t_shell_data *shell_data)
-{
-	int		index;
-	size_t	var_len;
-	char	*result;
-
-	index = 0;
-	var_len = ft_strlen(env_var);
-	while (shell_data->envp[index])
-	{
-		if (!ft_strncmp(shell_data->envp[index], env_var, var_len))
-		{
-			if (ft_strip_env_prefix(&result, shell_data->envp[index], var_len)
-				== EXIT_SUCCESS)
-				return (result);
-			else
-				return (NULL);
-		}
-		index++;
-	}
-	return (NULL);
-}
-
-int	ft_get_specific_path(t_shell_data *shell_data, char *env_var)
-{
-	char	*env_value;
-	char	*env_var_print;
-	int		exit_code;
-
-	env_value = ft_get_path_ret(env_var, shell_data);
-	if (!env_value)
-	{
-		env_var_print = ft_substr(env_var, 0, ft_strlen(env_var) - 1);
-		ft_putstr_fd(env_var_print, STDERR_FILENO);
-		ft_putendl_fd(" not set", STDERR_FILENO);
-		free(env_var_print);
-		return (-1);
-	}
-	exit_code = chdir(env_value);
-	free(env_value);
-	if (exit_code != 0)
-	{
-		env_var_print = ft_substr(env_var, 0, ft_strlen(env_var) - 1);
-		ft_putstr_fd(env_var_print, STDERR_FILENO);
-		ft_putendl_fd(" not set", STDERR_FILENO);
-		free(env_var_print);
-	}
-	return (exit_code);
-}
-
-void	ft_add_path_to_env(t_shell_data *shell_data)
+/**
+ * @brief Updates the PWD and OLDPWD variables in the environment array.
+ *
+ * This function:
+ *   - Searches for PWD and OLDPWD in the environment.
+ *   - Updates their values to match the shell's current and previous
+ * directories.
+ *
+ * @param shell_data Pointer to the main shell data structure.
+ */
+static void	ft_add_path_to_env(t_shell_data *shell_data)
 {
 	int		index;
 	char	*tmp;

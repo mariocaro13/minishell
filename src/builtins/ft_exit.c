@@ -1,5 +1,11 @@
 #include "minishell.h"
 
+/**
+ * @brief Checks if a string consists only of digits.
+ *
+ * @param str The string to check.
+ * @return true if the string is numeric, false otherwise.
+ */
 static bool	ft_is_str_digit(char *str)
 {
 	int	index;
@@ -14,6 +20,16 @@ static bool	ft_is_str_digit(char *str)
 	return (true);
 }
 
+/**
+ * @brief Determines the exit code from arguments and exits the shell.
+ *
+ * This function:
+ *   - Parses the exit code from the argument array.
+ *   - Handles non-numeric arguments and prints an error.
+ *   - Frees the argument array and exits the process.
+ *
+ * @param str Argument array.
+ */
 static void	ft_determine_exit_code(char **str)
 {
 	int	exit_code;

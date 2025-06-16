@@ -1,5 +1,12 @@
 #include "minishell.h"
 
+/**
+ * @brief Checks if an environment entry matches the given variable name.
+ *
+ * @param env_entry The environment entry string.
+ * @param var_name The variable name to match.
+ * @return EXIT_SUCCESS if matches, EXIT_FAILURE otherwise.
+ */
 static int	ft_env_var_match(const char *env_entry, const char *var_name)
 {
 	size_t	len;
@@ -11,6 +18,14 @@ static int	ft_env_var_match(const char *env_entry, const char *var_name)
 	return (EXIT_FAILURE);
 }
 
+/**
+ * @brief Processes environment entries and copies those not matching var_name.
+ *
+ * @param envp The original environment array.
+ * @param var_name The variable name to remove.
+ * @param new_env The new environment array to fill.
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on allocation error.
+ */
 static int	ft_process_env_entries(char **envp, const char *var_name,
 	char **new_env)
 {
@@ -36,6 +51,13 @@ static int	ft_process_env_entries(char **envp, const char *var_name,
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Removes a variable from the environment array.
+ *
+ * @param envp The original environment array.
+ * @param var_name The variable name to remove.
+ * @return The new environment array without the variable, or NULL on error.
+ */
 static char	**ft_remove_env_var(char **envp, const char *var_name)
 {
 	size_t	total;
@@ -53,6 +75,16 @@ static char	**ft_remove_env_var(char **envp, const char *var_name)
 	return (new_env);
 }
 
+/**
+ * @brief Checks for errors in the unset command arguments.
+ *
+ * This function:
+ *   - Validates the argument for unset.
+ *   - Prints errors for invalid identifiers or missing arguments.
+ *
+ * @param command_list Pointer to the command list.
+ * @return EXIT_SUCCESS if valid, EXIT_FAILURE if error.
+ */
 static int	ft_unset_error(t_command_list *command_list)
 {
 	int	i;

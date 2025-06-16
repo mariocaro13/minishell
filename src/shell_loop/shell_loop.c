@@ -1,5 +1,18 @@
 #include "minishell.h"
 
+/**
+ * @brief Reads and processes a line of input from the user.
+ *
+ * This function:
+ *   - Prompts the user and reads a line.
+ *   - Trims whitespace from the input.
+ *   - If the input is NULL (EOF), prints an exit message and exits the shell.
+ *   - If the input is empty, resets the shell loop.
+ *
+ * @param shell_data Pointer to the main shell data structure.
+ * @return EXIT_SUCCESS on valid input, or the result of resetting the shell
+ * loop.
+ */
 static int	ft_handle_input_line(t_shell_data *shell_data)
 {
 	shell_data->args = ft_get_trimmed_line(shell_data);
@@ -14,12 +27,23 @@ static int	ft_handle_input_line(t_shell_data *shell_data)
 	return (EXIT_SUCCESS);
 }
 
-static int	ft_validate_input(t_shell_data *t_shell_data)
+/**
+ * @brief Validates the user input for syntax correctness.
+ *
+ * This function:
+ *   - Checks if all quotes in the input are closed.
+ *   - Builds the token list from the input.
+ *   - Handles errors if quotes are not closed or memory allocation fails.
+ *
+ * @param shell_data Pointer to the main shell data structure.
+ * @return EXIT_SUCCESS if input is valid, otherwise an error handler result.
+ */
+static int	ft_validate_input(t_shell_data *shell_data)
 {
-	if (!ft_are_quotes_closed(t_shell_data->args))
-		return (ft_error_handle_msg(ERR_QUOTE, t_shell_data));
-	if (!ft_build_token_list(t_shell_data))
-		return (ft_error_handle_msg(ERR_MEMORY, t_shell_data));
+	if (!ft_are_quotes_closed(shell_data->args))
+		return (ft_error_handle_msg(ERR_QUOTE, shell_data));
+	if (!ft_build_token_list(shell_data))
+		return (ft_error_handle_msg(ERR_MEMORY, shell_data));
 	return (EXIT_SUCCESS);
 }
 

@@ -2,6 +2,22 @@
 
 bool	g_is_in_heredoc;
 
+/**
+ * @brief Entry point for the minishell program.
+ *
+ * This function:
+ *   - Checks for correct usage (no extra arguments).
+ *   - Initializes the shell data and environment.
+ *   - Sets up the history file path and loads previous history.
+ *   - Prints a welcome message.
+ *   - Starts the main shell loop.
+ *   - On exit, clears the readline history and frees resources.
+ *
+ * @param argc Argument count (should be 1 for correct usage).
+ * @param argv Argument vector.
+ * @param envp Environment variables.
+ * @return EXIT_SUCCESS on normal exit, EXIT_FAILURE on initialization error.
+ */
 int	main(int argc, char **argv, char **envp)
 {
 	t_shell_data	shell_data;

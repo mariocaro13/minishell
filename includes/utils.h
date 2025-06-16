@@ -14,7 +14,6 @@ bool	ft_are_quotes_closed(const char *line);
 int		ft_get_quote_len(int index, char *str, char del);
 size_t	ft_count_quotes(char *str);
 char	*ft_del_quotes(char *str, char c);
-char	*ft_del_quotes_value(char *str);
 char	*ft_apply_del_quotes(char *str, char quote_symbol);
 
 // input_utils

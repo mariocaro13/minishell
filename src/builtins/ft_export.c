@@ -1,6 +1,18 @@
 #include "minishell.h"
 
-int	ft_update_env_var(t_shell_data *shell_data, char *str)
+/**
+ * @brief Updates an existing environment variable if it matches the given
+ * string.
+ *
+ * This function:
+ *   - Searches for a variable with the same name as in str.
+ *   - Updates its value if found.
+ *
+ * @param shell_data Pointer to the main shell data structure.
+ * @param str The variable assignment string.
+ * @return 1 if updated, 0 if not found.
+ */
+static int	ft_update_env_var(t_shell_data *shell_data, char *str)
 {
 	int	index;
 	int	equal_index;
@@ -25,7 +37,17 @@ int	ft_update_env_var(t_shell_data *shell_data, char *str)
 	return (0);
 }
 
-int	ft_check_export_param(char *str)
+/**
+ * @brief Checks if the export parameter is valid.
+ *
+ * This function:
+ *   - Validates the identifier and assignment format.
+ *   - Prints an error if invalid.
+ *
+ * @param str The parameter string.
+ * @return 0 if valid, EXIT_FAILURE if invalid.
+ */
+static int	ft_check_export_param(char *str)
 {
 	int	index;
 
@@ -45,7 +67,15 @@ int	ft_check_export_param(char *str)
 	return (EXIT_SUCCESS);
 }
 
-char	**ft_copy_env_with_new_var(char **arr, char **rtn, char *str)
+/**
+ * @brief Copies the environment array and adds a new variable at the end.
+ *
+ * @param arr The original environment array.
+ * @param rtn The new array to fill.
+ * @param str The variable to add.
+ * @return The new environment array.
+ */
+static char	**ft_copy_env_with_new_var(char **arr, char **rtn, char *str)
 {
 	int	index;
 
@@ -69,7 +99,14 @@ char	**ft_copy_env_with_new_var(char **arr, char **rtn, char *str)
 	return (rtn);
 }
 
-char	**ft_add_env_var(char **arr, char *str)
+/**
+ * @brief Adds a new environment variable to the array.
+ *
+ * @param arr The original environment array.
+ * @param str The variable to add.
+ * @return The new environment array with the variable added.
+ */
+static char	**ft_add_env_var(char **arr, char *str)
 {
 	char	**result;
 	size_t	index;

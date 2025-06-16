@@ -1,5 +1,13 @@
 #include "minishell.h"
 
+/**
+ * @brief Checks if the given string is a valid -n option for echo.
+ *
+ * Accepts any string of the form -n, -nn, etc.
+ *
+ * @param str The string to check.
+ * @return true if it is a valid -n option, false otherwise.
+ */
 static bool	ft_is_n_option(const char *str)
 {
 	int	index;
@@ -16,7 +24,14 @@ static bool	ft_is_n_option(const char *str)
 	return (true);
 }
 
-void	ft_print_lines(int index, char **str, int out)
+/**
+ * @brief Prints the arguments of echo separated by spaces.
+ *
+ * @param index Starting index in the argument array.
+ * @param str Argument array.
+ * @param out Output file descriptor.
+ */
+static void	ft_print_lines(int index, char **str, int out)
 {
 	while (str[index])
 	{

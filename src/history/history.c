@@ -6,7 +6,7 @@
 /*   By: mcaro-ro <mcaro-ro@student.42madrid.com    +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2025/03/08 20:38:40 by mcaro-ro          #+#    #+#             */
-/*   Updated: 2025/06/13 05:33:47 by mcaro-ro         ###   ########.fr       */
+/*   Updated: 2025/06/16 10:54:41 by mcaro-ro         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -60,11 +60,11 @@ void	ft_add_to_history(const char *input, t_shell_data *shell_data)
 	ft_save_history_to_file(shell_data->history_path, input);
 }
 
-void	ft_save_history_to_file(const char *filename, const char *input)
+void	ft_save_history_to_file(const char *file_path, const char *input)
 {
 	int		fd;
 
-	fd = open(filename, O_WRONLY | O_CREAT | O_APPEND, 0644);
+	fd = open(file_path, O_WRONLY | O_CREAT | O_APPEND, 0644);
 	if (fd == -1)
 	{
 		perror(MSG_ERR_OPEN_FD);
@@ -76,13 +76,13 @@ void	ft_save_history_to_file(const char *filename, const char *input)
 	close(fd);
 }
 
-void	ft_load_history_from_file(const char *filename)
+void	ft_load_history_from_file(const char *file_path)
 {
 	int		fd;
 	int		len;
 	char	*line;
 
-	fd = open(filename, O_RDONLY);
+	fd = open(file_path, O_RDONLY);
 	if (fd == -1)
 		return ;
 	line = get_next_line(fd);

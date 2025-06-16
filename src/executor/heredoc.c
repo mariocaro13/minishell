@@ -1,5 +1,20 @@
 #include "minishell.h"
 
+/**
+ * @brief Reads a line from the user for heredoc input, checks for delimiter,
+ * expands variables if needed, and writes to file.
+ *
+ * Prompts the user for input, compares the line to the heredoc delimiter,
+ * and if not matched, expands variables
+ * (unless the delimiter is quoted) and writes the line to the heredoc file.
+ *
+ * @param heredoc Pointer to the heredoc lexer node.
+ * @param is_quoted True if the delimiter is quoted (no variable expansion).
+ * @param shell_data Pointer to the main shell data structure.
+ * @param fd File descriptor to write the heredoc content.
+ * @return true to continue reading lines, false to stop
+ * (delimiter found or EOF).
+ */
 static int	ft_process_heredoc_line(t_lexer_list *heredoc, bool is_quoted,
 	t_shell_data *shell_data, int fd)
 {
@@ -21,7 +36,20 @@ static int	ft_process_heredoc_line(t_lexer_list *heredoc, bool is_quoted,
 	return (true);
 }
 
-int	ft_create_heredoc(t_lexer_list *heredoc, bool is_quoted,
+/**
+ * @brief Creates the heredoc temporary file and writes user input to it.
+ *
+ * Opens the file for writing, then repeatedly reads lines from the user
+ * and writes them to the file until the delimiter is found or heredoc is
+ * interrupted.
+ *
+ * @param heredoc Pointer to the heredoc lexer node.
+ * @param is_quoted True if the delimiter is quoted (no variable expansion).
+ * @param shell_data Pointer to the main shell data structure.
+ * @param file_name Name of the heredoc temporary file to create.
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on error or interruption.
+ */
+static int	ft_create_heredoc(t_lexer_list *heredoc, bool is_quoted,
 	t_shell_data *shell_data, char *file_name)
 {
 	int		fd;
@@ -37,6 +65,15 @@ int	ft_create_heredoc(t_lexer_list *heredoc, bool is_quoted,
 	return (EXIT_SUCCESS);
 }
 
+/**
+ * @brief Checks if a heredoc delimiter is quoted.
+ *
+ * Determines if the delimiter string is surrounded by single or double quotes.
+ * Used to decide if variable expansion should occur in heredoc input.
+ *
+ * @param str The delimiter string.
+ * @return true if quoted, false otherwise.
+ */
 static bool	ft_is_quoted(const char *str)
 {
 	size_t	len;
@@ -50,7 +87,18 @@ static bool	ft_is_quoted(const char *str)
 	return (false);
 }
 
-int	ft_process_heredoc(t_shell_data *shell_data, t_lexer_list *heredoc,
+/**
+ * @brief Processes the heredoc logic for a single heredoc redirection.
+ *
+ * Removes quotes from the delimiter, sets heredoc state, and calls the heredoc
+ * creation routine.
+ *
+ * @param shell_data Pointer to the main shell data structure.
+ * @param heredoc Pointer to the heredoc lexer node.
+ * @param file_name Name of the heredoc temporary file to create.
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on error or interruption.
+ */
+static int	ft_process_heredoc(t_shell_data *shell_data, t_lexer_list *heredoc,
 	char *file_name)
 {
 	bool	is_quoted;

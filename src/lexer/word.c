@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+/**
+ * @brief Calculates the length of a word token starting at the given index.
+ *
+ * Iterates through the input string starting at 'start', stopping at
+ * whitespace or operator characters.
+ * Handles quoted substrings by skipping over them using ft_get_quote_len.
+ *
+ * @param start Start index in the input string.
+ * @param str Input string.
+ * @return Length of the word token, or -1 on error (e.g., unclosed quote).
+ */
 static int	ft_get_word_len(int start, char *str)
 {
 	int		index;
@@ -26,6 +37,18 @@ static int	ft_get_word_len(int start, char *str)
 	return (index);
 }
 
+/**
+ * @brief Adds a word token to the lexer list.
+ *
+ * Extracts a substring from the input string and adds it as a WORD
+ * token to the lexer list.
+ *
+ * @param start Start index of the word in the input string.
+ * @param len Length of the word.
+ * @param str Input string.
+ * @param lexer_list Pointer to the lexer list pointer.
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on allocation error.
+ */
 static int	ft_add_word_to_lexer(int start, int len, char *str,
 	t_lexer_list **lexer_list)
 {

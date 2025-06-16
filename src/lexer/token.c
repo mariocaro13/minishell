@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+/**
+ * @brief Gets the length of the next token in the input string.
+ *
+ * Determines the token type at the given start index and delegates to
+ * the appropriate handler: if it is a special token (operator),
+ * calls ft_handle_token; otherwise, calls ft_tokenize_word.
+ *
+ * @param shell_data Pointer to the main shell data structure.
+ * @param token_start Index in the input string where the token starts.
+ * @return Length of the token processed, or -1 on error.
+ */
 static int	ft_get_token_len(t_shell_data *shell_data, int token_start)
 {
 	t_token	token_type;
@@ -15,6 +26,17 @@ static int	ft_get_token_len(t_shell_data *shell_data, int token_start)
 				&shell_data->lexer_list));
 }
 
+/**
+ * @brief Consumes the next token in the input string, skipping whitespace.
+ *
+ * Skips leading spaces, determines the start of the next token,
+ * and processes it.
+ * Returns the total number of characters consumed (spaces + token length).
+ *
+ * @param shell_data Pointer to the main shell data structure.
+ * @param start Index in the input string to start processing.
+ * @return Number of characters consumed, or -1 on error.
+ */
 static int	ft_consume_token(t_shell_data *shell_data, int start)
 {
 	int	spaces_skipped;

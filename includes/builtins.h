@@ -2,12 +2,12 @@
 # define BUILTINS_H
 
 /**
-*  ____        _ _ _   _           
-* | __ ) _   _(_) | |_(_)_ __  ___ 
-* |  _ \| | | | | | __| | '_ \/ __|
-* | |_) | |_| | | | |_| | | | \__ \
-* |____/ \__,_|_|_|\__|_|_| |_|___/
-*/
+ *  ____        _ _ _   _           
+ * | __ ) _   _(_) | |_(_)_ __  ___ 
+ * |  _ \| | | | | | __| | '_ \/ __|
+ * | |_) | |_| | | | |_| | | | \__ \
+ * |____/ \__,_|_|_|\__|_|_| |_|___/
+ */
 
 /**
  * @brief Returns a pointer to the builtin function matching the given string.
@@ -67,12 +67,12 @@ char	*ft_del_quotes_value(char *str);
 int		ft_check_valid_identifier(char c);
 
 /**
-*  _____ _      ____    _ 
-* |  ___| |_   / ___|__| |
-* | |_  | __| | |   / _` |
-* |  _| | |_  | |__| (_| |
-* |_|    \__|  \____\__,_|
-*/
+ *  _____ _      ____    _ 
+ * |  ___| |_   / ___|__| |
+ * | |_  | __| | |   / _` |
+ * |  _| | |_  | |__| (_| |
+ * |_|    \__|  \____\__,_|
+ */
 
 /**
  * @brief Changes the current working directory.
@@ -89,12 +89,12 @@ int		ft_check_valid_identifier(char c);
 int		ft_cd(t_shell_data *shell_data, t_command_list *command_list);
 
 /**
-*  _____ _     _____     _           
-* |  ___| |_  | ____|___| |__   ___  
-* | |_  | __| |  _| / __| '_ \ / _ \ 
-* |  _| | |_  | |__| (__| | | | (_) |
-* |_|    \__| |_____\___|_| |_|\___/ 
-*/
+ *  _____ _     _____     _           
+ * |  ___| |_  | ____|___| |__   ___  
+ * | |_  | __| |  _| / __| '_ \ / _ \ 
+ * |  _| | |_  | |__| (__| | | | (_) |
+ * |_|    \__| |_____\___|_| |_|\___/ 
+ */
 
 /**
  * @brief Prints arguments to standard output.
@@ -110,12 +110,12 @@ int		ft_cd(t_shell_data *shell_data, t_command_list *command_list);
 int		ft_echo(t_shell_data *shell_data, t_command_list *command_list);
 
 /**
-*  _____ _     ____              _ 
-* |  ___| |_  |  _ \__      ____| |
-* | |_  | __| | |_) \ \ /\ / / _` |
-* |  _| | |_  |  __/ \ V  V / (_| |
-* |_|    \__| |_|     \_/\_/ \__,_|
-*/
+ *  _____ _     ____              _ 
+ * |  ___| |_  |  _ \__      ____| |
+ * | |_  | __| | |_) \ \ /\ / / _` |
+ * |  _| | |_  |  __/ \ V  V / (_| |
+ * |_|    \__| |_|     \_/\_/ \__,_|
+ */
 
 /**
  * @brief Prints the current working directory.
@@ -130,12 +130,12 @@ int		ft_echo(t_shell_data *shell_data, t_command_list *command_list);
 int		ft_pwd(t_shell_data *shell_data, t_command_list *command_list);
 
 /**
-*  _____ _     _____            
-* |  ___| |_  | ____|_ ____   __
-* | |_  | __| |  _| | '_ \ \ / /
-* |  _| | |_  | |___| | | \ V / 
-* |_|    \__| |_____|_| |_|\_/  
-*/
+ *  _____ _     _____            
+ * |  ___| |_  | ____|_ ____   __
+ * | |_  | __| |  _| | '_ \ \ / /
+ * |  _| | |_  | |___| | | \ V / 
+ * |_|    \__| |_____|_| |_|\_/  
+ */
 
 /**
  * @brief Prints the environment variables.
@@ -150,12 +150,12 @@ int		ft_pwd(t_shell_data *shell_data, t_command_list *command_list);
 int		ft_env(t_shell_data *shell_data, t_command_list *command_list);
 
 /**
-*  _____ _     _____      _ _   
-* |  ___| |_  | ____|_  _(_) |_ 
-* | |_  | __| |  _| \ \/ / | __|
-* |  _| | |_  | |___ >  <| | |_ 
-* |_|    \__| |_____/_/\_\_|\__|
-*/
+ *  _____ _     _____      _ _   
+ * |  ___| |_  | ____|_  _(_) |_ 
+ * | |_  | __| |  _| \ \/ / | __|
+ * |  _| | |_  | |___ >  <| | |_ 
+ * |_|    \__| |_____/_/\_\_|\__|
+ */
 
 /**
  * @brief Exits the shell.
@@ -171,13 +171,13 @@ int		ft_env(t_shell_data *shell_data, t_command_list *command_list);
 int		ft_exit(t_shell_data *shell_data, t_command_list *command_list);
 
 /**
-*  _____ _     _____                       _   
-* |  ___| |_  | ____|_  ___ __   ___  _ __| |_ 
-* | |_  | __| |  _| \ \/ / '_ \ / _ \| '__| __|
-* |  _| | |_  | |___ >  <| |_) | (_) | |  | |_ 
-* |_|    \__| |_____/_/\_\ .__/ \___/|_|   \__|
-*                        |_|                   
-*/
+ *  _____ _     _____                       _   
+ * |  ___| |_  | ____|_  ___ __   ___  _ __| |_ 
+ * | |_  | __| |  _| \ \/ / '_ \ / _ \| '__| __|
+ * |  _| | |_  | |___ >  <| |_) | (_) | |  | |_ 
+ * |_|    \__| |_____/_/\_\ .__/ \___/|_|   \__|
+ *                        |_|                   
+ */
 
 /**
  * @brief Adds or updates environment variables.
@@ -193,12 +193,12 @@ int		ft_exit(t_shell_data *shell_data, t_command_list *command_list);
 int		ft_export(t_shell_data *shell_data, t_command_list *command_list);
 
 /**
-*  _____ _     _   _                _   
-* |  ___| |_  | | | |_ __  ___  ___| |_ 
-* | |_  | __| | | | | '_ \/ __|/ _ \ __|
-* |  _| | |_  | |_| | | | \__ \  __/ |_ 
-* |_|    \__|  \___/|_| |_|___/\___|\__|
-*/
+ *  _____ _     _   _                _   
+ * |  ___| |_  | | | |_ __  ___  ___| |_ 
+ * | |_  | __| | | | | '_ \/ __|/ _ \ __|
+ * |  _| | |_  | |_| | | | \__ \  __/ |_ 
+ * |_|    \__|  \___/|_| |_|___/\___|\__|
+ */
 
 /**
  * @brief Removes environment variables.

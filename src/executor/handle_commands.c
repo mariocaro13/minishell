@@ -1,5 +1,15 @@
 #include "minishell.h"
 
+/**
+ * @brief Attempts to execute a command directly using its path.
+ *
+ * If the file exists at the given path, tries to execute it using execve.
+ * Returns -1 if execution fails or the file does not exist.
+ *
+ * @param command_list Pointer to the command list node.
+ * @param shell_data Pointer to the main shell data structure.
+ * @return -1 if execution fails.
+ */
 static int	ft_try_direct_exec(t_command_list *command_list,
 	t_shell_data *shell_data)
 {
@@ -8,6 +18,18 @@ static int	ft_try_direct_exec(t_command_list *command_list,
 	return (-1);
 }
 
+/**
+ * @brief Attempts to execute a command by searching through the PATH
+ * directories.
+ *
+ * Iterates through all directories in shell_data->paths, constructs
+ * the full path, and tries to execute the command using execve.
+ * Frees the constructed path after each attempt.
+ *
+ * @param command_list Pointer to the command list node.
+ * @param shell_data Pointer to the main shell data structure.
+ * @return -1 if execution fails for all paths.
+ */
 static int	ft_try_path_exec(t_command_list *command_list,
 	t_shell_data *shell_data)
 {

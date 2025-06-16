@@ -1,5 +1,15 @@
 #include "minishell.h"
 
+/**
+ * @brief Checks if the given command is a shell builtin that should be executed
+ * in the parent process.
+ *
+ * Builtins like cd, exit, export, and unset are handled in the parent shell
+ * process because they modify the shell state or environment.
+ *
+ * @param command Pointer to the command list node.
+ * @return true if the command is a parent-process builtin, false otherwise.
+ */
 static bool	ft_is_builtin_command(t_command_list *command)
 {
 	return (command->builtin == ft_cd
@@ -8,11 +18,31 @@ static bool	ft_is_builtin_command(t_command_list *command)
 		|| command->builtin == ft_unset);
 }
 
+/**
+ * @brief Executes a builtin command in the parent process.
+ *
+ * Calls the builtin function pointer stored in the command node.
+ *
+ * @param command Pointer to the command list node.
+ * @param shell_data Pointer to the main shell data structure.
+ * @return The exit code returned by the builtin.
+ */
 static int	ft_run_builtin(t_command_list *command, t_shell_data *shell_data)
 {
 	return (command->builtin(shell_data, command));
 }
 
+/**
+ * @brief Processes the exit status of a child process and updates the shell
+ * error number.
+ *
+ * Handles both normal exit and termination by signal, printing a newline for
+ * SIGINT.
+ *
+ * @param status Status value returned by waitpid.
+ * @param shell_data Pointer to the main shell data structure.
+ * @return The exit code or signal code as the shell should report it.
+ */
 static int	ft_process_exit_status(int status, t_shell_data *shell_data)
 {
 	int	signum;
@@ -33,6 +63,16 @@ static int	ft_process_exit_status(int status, t_shell_data *shell_data)
 	return (EXIT_FAILURE);
 }
 
+/**
+ * @brief Executes an external (non-builtin) command in a child process.
+ *
+ * Forks a new process, executes the command, and waits for it to finish.
+ * Updates the shell error number based on the exit status.
+ *
+ * @param command Pointer to the command list node.
+ * @param shell_data Pointer to the main shell data structure.
+ * @return The exit code or signal code as the shell should report it.
+ */
 static int	ft_run_command(t_command_list *command, t_shell_data *shell_data)
 {
 	int	pid;

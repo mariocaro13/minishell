@@ -1,16 +1,24 @@
 #ifndef MESSAGES_H
 # define MESSAGES_H
 
-# define MSG_USAGE "\033[33mUsage: ./minishell\033[0m\n"
+/**
+ * @file messages.h
+ * @brief Defines all user-facing messages, prompts, and error strings for
+ * minishell.
+ *
+ * This header centralizes all string literals used for prompts,
+ * welcome banners, usage instructions, heredoc prompts, and error messages,
+ * including color formatting.
+ */
 
+// Usage and prompts
+# define MSG_USAGE "\033[33mUsage: ./minishell\033[0m\n"
 # define MSG_DEFAULT_PROMPT "M&Mshell> "
 # define MSG_PWD_PROMPT "M&Mshell:"
-
 # define MSG_EXIT "exit"
-
 # define MSG_HEREDOC	"> "
 
-// WELCOME
+// Welcome banner (multi-line, colored ASCII art)
 # define MSG_WELCOME "\033[91m\n\
 ╔══════════════════════════════════════════════════════════════════════════════╗\n\
 ║                                                                              ║\n\
@@ -27,10 +35,7 @@
 ╚══════════════════════════════════════════════════════════════════════════════╝\
 \033[0m\n\n"
 
-// HISTORY
-# define HISTORY_FD "minishell_history.txt"
-
-// ERROR MSG
+// Error messages
 # define MSG_ERR_INIT "Error initializing shell.\n"
 # define MSG_ERR_OPEN_FD "Error: error opening file.\n"
 # define MSG_ERR_SYNTAX "Syntax error: unexpected token.\n"

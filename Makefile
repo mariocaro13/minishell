@@ -6,7 +6,7 @@
 #    By: mcaro-ro <mcaro-ro@student.42madrid.com    +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2025/06/10 20:22:12 by mcaro-ro          #+#    #+#              #
-#    Updated: 2025/06/12 02:06:22 by mcaro-ro         ###   ########.fr        #
+#    Updated: 2025/06/16 14:36:46 by mcaro-ro         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -91,18 +91,18 @@ src	=	$(PATH_SOURCE)/main.c						\
 		$(PATH_UTILS)/str_utils.c					\
 		$(PATH_UTILS)/input_utils.c					\
 		$(PATH_UTILS)/pipes_utils.c					\
-		$(PATH_UTILS)/expander_utils.c				\
-		$(PATH_UTILS)/heredoc_utils.c				\
 		$(PATH_EXECUTOR)/executor.c					\
 		$(PATH_EXECUTOR)/check_redirections.c		\
 		$(PATH_EXECUTOR)/handle_commands.c			\
 		$(PATH_EXECUTOR)/execute_command.c			\
 		$(PATH_EXECUTOR)/execute_pipeline_command.c	\
 		$(PATH_EXECUTOR)/heredoc.c					\
+		$(PATH_EXECUTOR)/heredoc_utils.c			\
 		$(PATH_EXPANDER)/expander.c					\
 		$(PATH_EXPANDER)/expander_str.c				\
 		$(PATH_EXPANDER)/dollar_sign.c				\
 		$(PATH_EXPANDER)/question_mark.c			\
+		$(PATH_EXPANDER)/expander_utils.c			\
 
 OBJS	=	$(addprefix $(PATH_OBJECTS), $(notdir $(patsubst %.c, %.o, $(src))))
 

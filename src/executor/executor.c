@@ -1,5 +1,15 @@
 #include "minishell.h"
 
+/**
+ * @brief Handles the execution of a pipeline of commands.
+ *
+ * Allocates memory for the array of process IDs (pid) needed for the pipeline,
+ * calls the pipeline execution routine, and returns EXIT_SUCCESS on success.
+ * If memory allocation fails, prints an error and returns EXIT_FAILURE.
+ *
+ * @param shell_data Pointer to the main shell data structure.
+ * @return EXIT_SUCCESS on success, EXIT_FAILURE on memory allocation error.
+ */
 static int	ft_handle_pipeline_command(t_shell_data *shell_data)
 {
 	shell_data->pid = ft_calloc(sizeof(int), shell_data->pipes + 2);

@@ -1,5 +1,16 @@
 #include "minishell.h"
 
+/**
+ * @brief Extracts the argument string from the current lexer node
+ * and removes the node from the lexer list.
+ *
+ * Duplicates the string from the current lexer node, deletes the node
+ * from the lexer list, and returns the duplicated string.
+ *
+ * @param parser_data Pointer to the parser data structure.
+ * @return Newly allocated string containing the argument, or NULL on
+ * allocation failure.
+ */
 static char	*ft_extract_token_argument(t_parser_data *parser_data)
 {
 	char			*argument;
@@ -14,8 +25,19 @@ static char	*ft_extract_token_argument(t_parser_data *parser_data)
 	return (argument);
 }
 
-static void	ft_build_arguments_loop(t_parser_data *parser_data, char **args,
-	int num_arg)
+/**
+ * @brief Fills the arguments array by extracting arguments from the lexer list.
+ *
+ * Iterates through the lexer list, extracts each argument using 
+ * t_extract_token_argument, and fills the args array. Sets the last element
+ * to NULL.
+ *
+ * @param parser_data Pointer to the parser data structure.
+ * @param args Array of strings to fill with arguments.
+ * @param num_arg Number of arguments to extract.
+ */
+static void	ft_build_arguments_loop(t_parser_data *parser_data,
+	char **args, int num_arg)
 {
 	int	index;
 
@@ -28,6 +50,16 @@ static void	ft_build_arguments_loop(t_parser_data *parser_data, char **args,
 	args[index] = NULL;
 }
 
+/**
+ * @brief Builds the array of command arguments from the parser data.
+ *
+ * Counts the number of argument tokens, allocates the array, and fills it
+ * using ft_build_arguments_loop. Handles memory errors.
+ *
+ * @param parser_data Pointer to the parser data structure.
+ * @return Newly allocated array of argument strings, or NULL on allocation
+ * failure.
+ */
 static char	**ft_build_command_arguments(t_parser_data *parser_data)
 {
 	char			**args;

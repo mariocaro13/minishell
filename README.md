@@ -5,8 +5,8 @@
 
 ## FIXME:
 
-> [!CAUTION]
-> - [ ] Leak: 
+> [!TIP]
+> - [x] Leak: 
 > Conditional jump or move depends on uninitialised value(s)
 > ft_init_shell_data 
 > ft_init_shell

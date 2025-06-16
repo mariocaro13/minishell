@@ -36,13 +36,8 @@ void	ft_init_shell_data(t_shell_data *shell_data)
 	shell_data->pipes = 0;
 	shell_data->pid = NULL;
 	shell_data->heredoc = false;
-	if (!shell_data->old_pwd)
-		shell_data->old_pwd = NULL;
-	if (shell_data->old_pwd)
-	{
-		free(shell_data->old_pwd);
-		shell_data->old_pwd = NULL;
-	}
+	free(shell_data->old_pwd);
+	shell_data->old_pwd = NULL;
 	shell_data->reset = false;
 }
 
@@ -64,6 +59,7 @@ int	ft_init_shell(t_shell_data *shell_data, char **envp)
 {
 	if (!shell_data || !envp)
 		return (EXIT_FAILURE);
+	shell_data->old_pwd = NULL;
 	ft_init_shell_data(shell_data);
 	if (ft_init_shell_envp(shell_data, envp) != EXIT_SUCCESS)
 		return (EXIT_FAILURE);

@@ -17,7 +17,7 @@
  * |_| \_\___||___/\___|\__|
  */
 
-# define COLOR_RESET			"\033[0m"
+# define COLOR_RESET			"\001\033[0m\002"
 
 /**
  *  ____  _                  _            
@@ -27,15 +27,15 @@
  * |____/ \__\__,_|_| |_|\__,_|\__,_|_|   
  */
 
-# define COLOR_BLACK   			"\033[30m"
-# define COLOR_WHITE   			"\033[37m"
-# define COLOR_RED     			"\033[31m"
-# define COLOR_GREEN   			"\033[32m"
-# define COLOR_YELLOW  			"\033[33m"
-# define COLOR_BLUE    			"\033[34m"
-# define COLOR_MAGENTA 			"\033[35m"
-# define COLOR_CYAN    			"\033[36m"
-# define COLOR_GREY    			"\033[90m"
+# define COLOR_BLACK   			"\001\033[30m\002"
+# define COLOR_WHITE   			"\001\033[37m\002"
+# define COLOR_RED     			"\001\033[31m\002"
+# define COLOR_GREEN   			"\001\033[32m\002"
+# define COLOR_YELLOW  			"\001\033[33m\002"
+# define COLOR_BLUE    			"\001\033[34m\002"
+# define COLOR_MAGENTA 			"\001\033[35m\002"
+# define COLOR_CYAN    			"\001\033[36m\002"
+# define COLOR_GREY    			"\001\033[90m\002"
 
 /**
  *  ____  _           _ 
@@ -45,15 +45,15 @@
  * |____/|_|\___/ \__,_|
  */
 
-# define COLOR_BLACK_BOLD   	"\033[1;30m"
-# define COLOR_WHITE_BOLD   	"\033[1;37m"
-# define COLOR_RED_BOLD     	"\033[1;31m"
-# define COLOR_GREEN_BOLD   	"\033[1;32m"
-# define COLOR_YELLOW_BOLD  	"\033[1;33m"
-# define COLOR_BLUE_BOLD    	"\033[1;34m"
-# define COLOR_MAGENTA_BOLD 	"\033[1;35m"
-# define COLOR_CYAN_BOLD    	"\033[1;36m"
-# define COLOR_BROWN_BOLD		"\033[1;38;130m"
+# define COLOR_BLACK_BOLD   	"\001\033[1;30m\002"
+# define COLOR_WHITE_BOLD   	"\001\033[1;37m\002"
+# define COLOR_RED_BOLD     	"\001\033[1;31m\002"
+# define COLOR_GREEN_BOLD   	"\001\033[1;32m\002"
+# define COLOR_YELLOW_BOLD  	"\001\033[1;33m\002"
+# define COLOR_BLUE_BOLD    	"\001\033[1;34m\002"
+# define COLOR_MAGENTA_BOLD 	"\001\033[1;35m\002"
+# define COLOR_CYAN_BOLD    	"\001\033[1;36m\002"
+# define COLOR_BROWN_BOLD		"\001\033[1;38;130m\002"
 
 /**
  *  _     _       _     _   
@@ -64,14 +64,14 @@
  *          |___/           
  */
 
-# define COLOR_LIGHT_RED		"\033[91m"
-# define COLOR_LIGHT_GREEN		"\033[92m"
-# define COLOR_LIGHT_YELLOW		"\033[93m"
-# define COLOR_LIGHT_BLUE		"\033[94m"
-# define COLOR_LIGHT_MAGENTA	"\033[95m"
-# define COLOR_LIGHT_CYAN		"\033[96m"
-# define COLOR_LIGHT_GREY		"\033[37m"
-# define COLOR_LIGHT_BROWN		"\033[38;180m"
+# define COLOR_LIGHT_RED		"\001\033[91m\002"
+# define COLOR_LIGHT_GREEN		"\001\033[92m\002"
+# define COLOR_LIGHT_YELLOW		"\001\033[93m\002"
+# define COLOR_LIGHT_BLUE		"\001\033[94m\002"
+# define COLOR_LIGHT_MAGENTA	"\001\033[95m\002"
+# define COLOR_LIGHT_CYAN		"\001\033[96m\002"
+# define COLOR_LIGHT_GREY		"\001\033[37m\002"
+# define COLOR_LIGHT_BROWN		"\001\033[38;180m\002"
 
 /**
  *   ____          _                  
@@ -81,6 +81,6 @@
  *  \____\__,_|___/\__\___/|_| |_| |_|
  */
 
-# define COLOR_BROWN			"\033[38;130m"
+# define COLOR_BROWN			"\001\033[38;130m\002"
 
 #endif

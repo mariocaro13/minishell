@@ -66,11 +66,11 @@ int	ft_handle_outfile(t_lexer_list *redirection)
 	return (EXIT_SUCCESS);
 }
 
-int	ft_handle_redirections(t_command_list *cmd)
+int	ft_handle_redirections(t_command_list *command)
 {
 	t_lexer_list	*current;
 
-	current = cmd->redirections;
+	current = command->redirections;
 	while (current)
 	{
 		if (current->token == REDIRECT_IN)
@@ -86,9 +86,9 @@ int	ft_handle_redirections(t_command_list *cmd)
 		}
 		else if (current->token == REDIRECT_HEREDOC)
 		{
-			if (ft_handle_infile(cmd->heredoc_file_name))
+			if (ft_handle_infile(command->heredoc_file_name))
 				return (EXIT_FAILURE);
-			unlink(cmd->heredoc_file_name);
+			unlink(command->heredoc_file_name);
 		}
 		current = current->next;
 	}

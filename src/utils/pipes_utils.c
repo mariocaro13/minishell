@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   pipes_utils.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaro-ro <mcaro-ro@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mgalvez- <mgalvez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 15:06:26 by mcaro-ro          #+#    #+#             */
-/*   Updated: 2025/06/24 15:06:28 by mcaro-ro         ###   ########.fr       */
+/*   Created: 2025/06/24 15:09:40 by mgalvez-          #+#    #+#             */
+/*   Updated: 2025/06/24 15:09:41 by mgalvez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "minishell.h"
 

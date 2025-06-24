@@ -3,12 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   env_utils.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: mcaro-ro <mcaro-ro@student.42madrid.com    +#+  +:+       +#+        */
+/*   By: mgalvez- <mgalvez-@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2025/06/24 15:06:16 by mcaro-ro          #+#    #+#             */
-/*   Updated: 2025/06/24 15:06:18 by mcaro-ro         ###   ########.fr       */
+/*   Created: 2025/06/24 15:09:32 by mgalvez-          #+#    #+#             */
+/*   Updated: 2025/06/24 15:09:33 by mgalvez-         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
+
+
 
 #include "minishell.h"
 
